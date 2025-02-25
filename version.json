@@ -1,0 +1,18 @@
+{
+  "name": "Lite++",
+  "version": "1.0.0",
+  "changes": [
+    {
+      "type": "Bug Fix",
+      "description": "Fixed minor bugs for overall stability."
+    },
+    {
+      "type": "Improvement",
+      "description": "Optimized performance for faster load times."
+    },
+    {
+      "type": "Feature",
+      "description": "Added user-friendly settings menu."
+    }
+  ]
+}

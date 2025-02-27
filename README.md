@@ -1,48 +1,62 @@
 # Lite++
-**Lite++** is a powerful app that allows you to extract Facebook cookies and access tokens, as well as use Facebook in desktop mode within the app. With **Lite++**, you can easily access and manage your Facebook account on the go.
 
-# Note
-This is a temporary update. I will work on it soon and add more useful features. Currently, I have just removed unnecessary things from it.
+Lite++ is a lightweight and efficient browser built exclusively for Facebook. Unlike traditional browsers, it is designed solely for navigating Facebook, ensuring an optimized and feature-rich experience tailored specifically for the platform.
 
-# Features
-- **Extract Facebook Cookies:**
-**Lite++** allows you to easily extract and save your Facebook cookies, giving you quick and easy access to your account on any device.
+> **Notice:** This project was originally created 2 years ago. I recently found it, made some improvements, and decided to open-source it. The current version is **1.0.0**.
 
-~~- **Extract Facebook Access Token:**
-In addition to extracting cookies, **Lite++** also enables you to extract your Facebook access token, which can be used to authenticate API calls and perform various actions on your account.~~
+## Features
 
-- **Desktop Mode:**
-**Lite++** includes a built-in web browser that allows you to use Facebook in desktop mode, providing a more seamless and intuitive experience.
+- **Desktop Mode**: Browse Facebook in desktop mode for a full web experience.
+- **Edit Cookies**: Modify Facebook cookies directly within the application.
+- **Extract Cookies**: Retrieve and manage cookies for various purposes.
+- **Custom Useragent**: You can set custom useragent for webview
+- **Lightweight**: Optimized for performance, ensuring smooth usage without unnecessary overhead.
 
-# How to use?
-1. Download and install the app on your device.
-2. Log in to your Facebook account within the app.
-3. Enjoy **Lite++**
+## Installation
 
-# How to Extract Cookies and Access Token 
-To extract your Facebook cookies and access token, simply open the **Lite++** click on top right 3 dots menu and select the "Extract Cookies" or "Extract Access Token" options.
+### Android
 
-# How to use Desktop Mode
-To use Facebook in desktop mode, simply open the **Lite++** click on top right 3 dots menu and select the "Extract Cookies" option.
+1. Download the latest APK from the [Releases](https://github.com/farhaanaliii/Lite/releases) section.
+2. Install the APK on your Android device.
+3. Open Lite++ and enjoy a streamlined Facebook experience.
 
-# Update 0.03 (beta)
-- removed useless features
-- Migrate from AppCompat to AndroidX
+## Usage
 
+1. Launch Lite++.
+2. Log in to your Facebook account.
+3. Use the menu to access features such as **Desktop Mode, Edit Cookies, and Extract Cookies**.
+4. Toggle between mobile and desktop mode as needed.
 
+## Screenshots
 
-# Update 0.02
-- -Added Edit Cookies Feature
-- -Desktop Option Fixed
-- -Improved
-- -Added Some Shortcuts for Facebook
+(Add screenshots here)
 
-# Important Note
-**Lite++** is currently in the development phase and as such, it is possible that users may encounter errors or bugs while using the app. If you experience any issues while using **Lite++**, please open a new issue on the app's GitHub page.
+## Build with Android Studio
 
-# Latest Version
-**Lite++** has currently 0.03 latest Version.
+### Requirements
+- Android Studio (latest version recommended)
+- Java Development Kit (JDK)
+- Android SDK and necessary dependencies
 
-# How to Download
-Click on Download Button to download Latest Version of **Lite++**<br>
-[![Download apk](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download Apk")](https://www.mediafire.com/file/16hzmg0gdpe7awk/Lite%252B%252B_0.03_Farhan_Ali.apk/file)
+### Steps
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/farhaanaliii/Lite.git
+   ```
+2. Open Android Studio and select **Open an Existing Project**.
+3. Navigate to the cloned repository and open it.
+4. Allow Android Studio to sync and install dependencies.
+5. Build and run the project on an emulator or a physical device.
+
+## Contributing
+
+Contributions are welcome! If you have suggestions, feel free to open an issue or submit a pull request.
+
+## License
+
+Lite++ is open-source under the [MIT License](LICENSE).
+
+---
+
+Made with ❤️ by [Farhan Ali](https://github.com/farhaanaliii)
+

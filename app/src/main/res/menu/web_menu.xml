@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/refresh"
+        android:title="@string/refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/getCookies"
+        android:title="@string/extract_cookies"/>
+	<item
+        android:id="@+id/editCookies"
+        android:title="@string/edit_cookies"/>
+
+	<item
+		android:id="@+id/desktop_mode"
+		android:title="@string/desktop_mode"
+		android:checkable="true"
+		android:enabled="true"
+		app:actionLayout="@layout/desktop_menu"
+		android:icon="@drawable/ic_desktop"/>
+
+	<item
+		android:id="@+id/about"
+		android:title="@string/menu_about"/>
+
+    <item
+        android:id="@+id/current_url"
+        android:title="@string/menu_current_url"/>
+
+	<item
+		android:id="@+id/checkupdates"
+		android:title="@string/check_for_updates"/>
+
+	<item
+		android:id="@+id/settings"
+		android:title="@string/settings"/>
+
+</menu>

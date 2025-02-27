@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Lite++</string>
+    <string name="about">Lite++ By Farhan Ali</string>
+    <string name="home">Home</string>
+    <string name="refresh">Refresh</string>
+    <string name="extract_cookies">Extract Cookies</string>
+    <string name="edit_cookies">Edit Cookies</string>
+    <string name="desktop_mode">Desktop Mode</string>
+    <string name="dev_name">Farhan Ali</string>
+    <string name="dev_email">i.farhanali.dev@gmail.com</string>
+    <string name="dev_yt">https://youtube.com/@TheAnonymous_ofc</string>
+    <string name="dev_github">https://www.github.com/farhaanaliii/Lite/</string>
+    <string name="dev_fb">https://www.facebook.com/i.farhanali.dev</string>
+    <string name="current_version">1.0.0</string>
+    <string name="menu_about">About</string>
+    <string name="menu_current_url">See Current URL</string>
+    <string name="no_internet">No Internet connection!</string>
+
+    <string name="preference_title_developer">Developer</string>
+    <string name="preference_title_about_app">About App</string>
+    <string name="preference_title_contact">Contact</string>
+    <string name="preference_title_version">Version</string>
+    <string name="preference_title_app_status">App Status</string>
+    <string name="preference_title_bugs_features">Bugs and Features</string>
+    <string name="preference_title_facebook">Facebook</string>
+    <string name="preference_title_github">GitHub</string>
+    <string name="preference_title_youtube">YouTube</string>
+    <string name="app_status">This app is currently under development</string>
+    <string name="bugs_and_features">Report bugs or suggest features</string>
+    <string name="check_for_updates">Check for updates</string>
+    <string name="settings">Settings</string>
+</resources>

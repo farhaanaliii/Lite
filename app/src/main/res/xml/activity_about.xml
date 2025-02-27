@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/preference_title_developer"
+        android:key="Key_developer"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:title="@string/dev_name"
+            android:key="Key_dev_name"
+            android:summary="Creator and Developer of Lite++"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_title_about_app"
+        android:key="Key_app"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:title="@string/preference_title_version"
+            android:key="Key_version"
+            android:summary="@string/current_version"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:title="@string/preference_title_app_status"
+            android:key="Key_status"
+            android:summary="@string/app_status"
+            app:iconSpaceReserved="false" />
+
+        <PreferenceScreen
+            android:title="@string/preference_title_bugs_features"
+            android:key="Key_feature"
+            android:summary="@string/bugs_and_features"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_title_contact"
+        android:key="Key_contact"
+        app:iconSpaceReserved="false">
+
+        <PreferenceScreen
+            android:title="@string/preference_title_facebook"
+            android:key="Key_facebook"
+            android:summary="Contact me on Facebook"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/dev_fb" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="@string/preference_title_github"
+            android:key="Key_github"
+            android:summary="Star on GitHub"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/dev_github" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="@string/preference_title_youtube"
+            android:key="Key_yt"
+            android:summary="Subscribe to my channel"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/dev_yt" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="Email"
+            android:key="Key_email"
+            android:summary="@string/dev_email"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

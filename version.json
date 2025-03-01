@@ -1,0 +1,10 @@
+{
+  "name": "Lite++",
+  "version": "1.0.1",
+  "changes": [
+    {
+      "type": "fix",
+      "description": "Fixed crash during update check."
+    }
+  ]
+}

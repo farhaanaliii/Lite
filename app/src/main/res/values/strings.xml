@@ -11,7 +11,7 @@
     <string name="dev_yt">https://youtube.com/@TheAnonymous_ofc</string>
     <string name="dev_github">https://www.github.com/farhaanaliii/Lite/</string>
     <string name="dev_fb">https://www.facebook.com/i.farhanali.dev</string>
-    <string name="current_version">1.0.0</string>
+    <string name="current_version">1.0.1</string>
     <string name="menu_about">About</string>
     <string name="menu_current_url">See Current URL</string>
     <string name="no_internet">No Internet connection!</string>

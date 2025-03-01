@@ -3,6 +3,8 @@ package com.farhanali.lite.service;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -43,14 +45,14 @@ public class UpdateChecker {
     public void execute() {
         executor.execute(() -> {
             checkUpdate();
-            if (latestVersion != null && latestVersion.greaterThan(currentVersion)) {
-                showDialog();
-            } else {
-                ((AppCompatActivity) mContext).runOnUiThread(() -> {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (latestVersion != null && latestVersion.greaterThan(currentVersion)) {
+                    showDialog();
+                } else {
                     Utils.Toast(mContext, "You are using the latest version.");
-                });
-                Log.d("No Update", "No update available");
-            }
+                    Log.d("No Update", "No update available");
+                }
+            });
         });
     }
 

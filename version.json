@@ -1,22 +1,10 @@
 {
   "name": "Lite++",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "changes": [
     {
-      "type": "improvement",
-      "description": "Refactored and improved codebase for better maintainability."
-    },
-    {
-      "type": "feature",
-      "description": "Added a user-friendly settings menu."
-    },
-    {
-      "type": "performance",
-      "description": "Optimized WebView performance for smoother browsing."
-    },
-    {
       "type": "fix",
-      "description": "Fixed minor issues related to cookies and user-agent handling."
+      "description": "Fixed crash during update check."
     }
   ]
 }

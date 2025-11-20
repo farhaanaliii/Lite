@@ -23,6 +23,8 @@ import android.content.Context;
 import android.widget.Toast;
 import com.farhanali.lite.utils.Settings;
 import com.farhanali.lite.view.Dialogs;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 public class MainActivity extends AppCompatActivity{
     WebView webView;
@@ -32,8 +34,14 @@ public class MainActivity extends AppCompatActivity{
     String userAgent;
 	CookieManager cookieManager = CookieManager.getInstance();
     Context context;
-
     Settings settings;
+    private static boolean hasCheckedUpdate = false;
+    ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            recreate();
+        });
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -41,12 +49,7 @@ public class MainActivity extends AppCompatActivity{
 
         context = this;
         init();
-        
-        if(Utils.isInternetOn(context)){
-            new UpdateChecker(context).execute();
-        }else{
-			Utils.Toast(context, getString(R.string.no_internet));
-		}
+
     }
     @SuppressLint("SetJavaScriptEnabled")
     private void init(){
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity{
             userAgent = settings.getCustomUserAgent();
         }
 
+        webSettings.setUserAgentString(userAgent.trim());
         webSettings.setJavaScriptEnabled(settings.isJavaScriptEnabled());
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false);
@@ -135,7 +139,7 @@ public class MainActivity extends AppCompatActivity{
                 Utils.Toast(context, getString(R.string.no_internet));
             }
         } else if(id == R.id.settings){
-            startActivity(new Intent(context, SettingsActivity.class));
+            settingsLauncher.launch(new Intent(context, SettingsActivity.class));
         }
 
         return true;
@@ -152,6 +156,19 @@ public class MainActivity extends AppCompatActivity{
         isDesktopMode = isDesktopEnabled;
         item.setChecked(isDesktopEnabled);
         settings.setDesktopModeEnabled(isDesktopEnabled);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!hasCheckedUpdate){
+            hasCheckedUpdate = true;
+            if(Utils.isInternetOn(context)){
+                new UpdateChecker(context).execute();
+            }else{
+                Utils.Toast(context, getString(R.string.no_internet));
+            }
+        }
     }
 
     public WebView getWebView(){

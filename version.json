@@ -1,10 +1,14 @@
 {
   "name": "Lite++",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "changes": [
     {
       "type": "fix",
-      "description": "Fixed crash during update check."
+      "description": "Fixed user agent settings not applying to WebView"
+    },
+    {
+      "type": "fix",
+      "description": "Prevented duplicate update checks after settings changes"
     }
   ]
 }

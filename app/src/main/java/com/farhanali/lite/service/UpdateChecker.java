@@ -76,18 +76,18 @@ public class UpdateChecker {
                     }
                 }
             } else {
-                Log.e("Network Error", "Response Code: " + connection.getResponseCode());
+                Log.e("UpdateChecker", "Network Error, Response Code: " + connection.getResponseCode());
             }
         } catch (Exception e) {
-            Log.e("Error", "Failed to fetch data", e);
+            Log.e("UpdateChecker", "Failed to fetch version data", e);
         }
 
         try {
             jsonResponse = responseBuilder.toString();
             JSONObject jsonObject = new JSONObject(jsonResponse);
-            latestVersion = Version.valueOf(jsonObject.getString("version"));
+            latestVersion = Version.valueOf(jsonObject.getString("latest_version"));
         } catch (Exception e) {
-            Log.e("Parsing Error", "Failed to parse JSON", e);
+            Log.e("UpdateChecker", "Failed to parse version JSON", e);
         }
     }
 

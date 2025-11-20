@@ -1,0 +1,46 @@
+{
+    "app_name": "Lite++",
+    "package_name": "com.farhanali.lite",
+    "latest_version": "1.0.2",
+    "latest_version_code": 3,
+    "download_url": "https://github.com/farhaanaliii/Lite/releases/latest",
+    "changelog": [
+        {
+            "version": "1.0.2",
+            "version_code": 3,
+            "release_date": "2024-01-15",
+            "changes": [
+                {
+                    "type": "fix",
+                    "description": "Fixed user agent settings not applying to WebView"
+                },
+                {
+                    "type": "fix",
+                    "description": "Prevented duplicate update checks after settings changes"
+                }
+            ]
+        },
+        {
+            "version": "1.0.1",
+            "version_code": 2,
+            "release_date": "2024-01-10",
+            "changes": [
+                {
+                    "type": "fix",
+                    "description": "Fixed crash during update check process"
+                }
+            ]
+        },
+        {
+            "version": "1.0.0",
+            "version_code": 1,
+            "release_date": "2024-01-01",
+            "changes": [
+                {
+                    "type": "feature",
+                    "description": "Initial release"
+                }
+            ]
+        }
+    ]
+}

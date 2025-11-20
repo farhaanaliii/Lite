@@ -78,36 +78,64 @@ public class Dialogs {
 
     public static void showUpdateDialog(Context context, String jsonResponse) {
         try {
-            JSONObject jsonObject = new JSONObject(jsonResponse);
-            String name = jsonObject.getString("name");
-            String version = jsonObject.getString("version");
-            JSONArray changesArray = jsonObject.getJSONArray("changes");
-
-            StringBuilder changesBuilder = new StringBuilder();
-            changesBuilder.append("Updates for ").append(name).append(" v").append(version).append(":\n\n");
-
-            for (int i = 0; i < changesArray.length(); i++) {
-                JSONObject change = changesArray.getJSONObject(i);
-                String type = change.getString("type");
-                String description = change.getString("description");
-                changesBuilder.append("• ").append(type).append(": ").append(description).append("\n");
+            JSONObject json = new JSONObject(jsonResponse);
+            String latestVersion = json.getString("latest_version");
+            String downloadUrl = json.getString("download_url");
+            JSONArray changelog = json.getJSONArray("changelog");
+            
+            SpannableStringBuilder message = new SpannableStringBuilder();
+            message.append("Version ").append(latestVersion).append(" is available!\n\n");
+            
+            for (int i = 0; i < changelog.length(); i++) {
+                JSONObject release = changelog.getJSONObject(i);
+                if (release.getString("version").equals(latestVersion)) {
+                    JSONArray changes = release.getJSONArray("changes");
+                    message.append("What's new:\n");
+                    
+                    for (int j = 0; j < changes.length(); j++) {
+                        JSONObject change = changes.getJSONObject(j);
+                        String type = change.getString("type");
+                        String description = change.getString("description");
+                        
+                        message.append(getChangeIcon(type))
+                            .append(" ")
+                            .append(description)
+                            .append("\n");
+                    }
+                    break;
+                }
             }
+            
+            message.append("\nWould you like to download the update?");
+            
+            new AlertDialog.Builder(context)
+                .setTitle("Update Available")
+                .setMessage(message)
+                .setPositiveButton("Download", (dialog, which) -> {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl));
+                    context.startActivity(browserIntent);
+                })
+                .setNegativeButton("Later", null)
+                .show();
+                
+        } catch (Exception e) {
+            new AlertDialog.Builder(context)
+                .setTitle("Update Available")
+                .setMessage("A new version is available!")
+                .setPositiveButton("OK", null)
+                .show();
+        }
+    }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Update Available")
-                    .setMessage(changesBuilder.toString())
-                    .setPositiveButton("Download Now", (dialog, which) -> {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.GITHUB_REPO));
-                        context.startActivity(browserIntent);
-                    })
-                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                    .setCancelable(false);
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-        } catch (JSONException e) {
-            Log.e("JSON Error", "Failed to parse JSON response", e);
+    private static String getChangeIcon(String type) {
+        switch (type) {
+            case "feature": return "✨"; // New feature
+            case "fix": return "🐛";     // Bug fix  
+            case "improvement": return "⚡"; // Improvement
+            case "security": return "🔒"; // Security fix
+            case "performance": return "🚀"; // Performance
+            case "ui": return "🎨";      // UI/UX change
+            default: return "•";
         }
     }
 

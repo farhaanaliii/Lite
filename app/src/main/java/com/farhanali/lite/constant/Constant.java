@@ -1,7 +1,7 @@
 package com.farhanali.lite.constant;
 
 public class Constant {
-	public static final String VERSION_URL = "https://raw.githubusercontent.com/farhaanaliii/Lite/refs/heads/main/version.json";
+	public static final String VERSION_URL = "https://raw.githubusercontent.com/farhaanaliii/Lite/refs/heads/main/updates.json";
 	public static final String DESKTOP_USERAGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36";
 	public static final String FACEBOOK_HOME = "https://www.facebook.com";
 	public static final String GITHUB_REPO = "https://github.com/farhaanaliii/Lite";

@@ -12,14 +12,14 @@
             android:dialogTitle="Enter User-Agent"
             android:defaultValue=""
             android:inputType="text"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/ic_user_agent" />
 
         <SwitchPreferenceCompat
             android:key="pref_javascript"
             android:title="Enable JavaScript"
             android:summary="Allow JavaScript execution in web content"
             android:defaultValue="true"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/baseline_javascript_24" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -29,15 +29,13 @@
             android:key="pref_cache"
             android:title="Clear Cache"
             android:summary="Delete cached data to free up space"
-            android:icon="@android:drawable/ic_menu_delete"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/baseline_cached_24" />
 
         <Preference
             android:key="pref_data"
             android:title="Clear Storage"
             android:summary="Reset all app data and settings"
-            android:icon="@android:drawable/ic_delete"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/ic_storage" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -47,8 +45,7 @@
             android:key="pref_reset"
             android:title="Reset to Default"
             android:summary="Restore all settings to default values"
-            android:icon="@android:drawable/ic_menu_revert"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/ic_reset" />
     </PreferenceCategory>
 
 </PreferenceScreen>

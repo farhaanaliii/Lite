@@ -2,15 +2,14 @@ package com.farhanali.lite.service;
 
 import android.webkit.WebViewClient;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 import android.graphics.Bitmap;
 import android.webkit.WebResourceRequest;
-import android.util.Log;
 import android.view.View;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class LiteWebViewClient extends WebViewClient{
-    private final ProgressBar progressBar;
-    public LiteWebViewClient(ProgressBar mprogressBar){
+    private final LinearProgressIndicator progressBar;
+    public LiteWebViewClient(LinearProgressIndicator mprogressBar){
         progressBar = mprogressBar;
     }
         @Override
@@ -21,13 +20,17 @@ public class LiteWebViewClient extends WebViewClient{
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            progressBar.setVisibility(View.VISIBLE);
+            if (progressBar != null) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            progressBar.setVisibility(View.INVISIBLE);
+            if (progressBar != null) {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
         }
 
     }

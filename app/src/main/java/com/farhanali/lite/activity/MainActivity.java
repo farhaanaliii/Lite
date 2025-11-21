@@ -4,11 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 import android.webkit.CookieManager;
 import android.os.Bundle;
 import com.farhanali.lite.R;
-import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.farhanali.lite.utils.Utils;
 import com.farhanali.lite.constant.Constant;
 import android.webkit.WebSettings;
@@ -20,16 +19,16 @@ import android.view.MenuItem;
 import android.content.Intent;
 import com.farhanali.lite.service.UpdateChecker;
 import android.content.Context;
-import android.widget.Toast;
 import com.farhanali.lite.utils.Settings;
 import com.farhanali.lite.view.Dialogs;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class MainActivity extends AppCompatActivity{
     WebView webView;
 	WebSettings webSettings;
-    ProgressBar progressBar;
+    LinearProgressIndicator progressBar;
     boolean isDesktopMode;
     String userAgent;
 	CookieManager cookieManager = CookieManager.getInstance();
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
     }
     @SuppressLint("SetJavaScriptEnabled")
     private void init(){
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
         settings = new Settings(context);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            progressBar.setProgress(newProgress);
+            progressBar.setProgress(newProgress, true);
             }
         });
 

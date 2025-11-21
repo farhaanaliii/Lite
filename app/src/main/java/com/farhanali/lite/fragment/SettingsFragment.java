@@ -54,6 +54,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         EditTextPreference userAgentPref = findPreference(Constant.PREF_KEY_CUSTOM_USER_AGENT);
         if (userAgentPref != null) {
+            userAgentPref.setDialogLayoutResource(R.layout.dialog_edittext_useragent);
             userAgentPref.setText(settings.getCustomUserAgent());
             userAgentPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 String newUserAgent = (String) newValue;

@@ -5,11 +5,13 @@
         android:id="@+id/home"
         android:title="@string/home"
         android:icon="@drawable/ic_home"
+        app:iconTint="@android:color/white"
         app:showAsAction="always"/>
     <item
         android:id="@+id/refresh"
         android:title="@string/refresh"
         android:icon="@drawable/ic_refresh"
+        app:iconTint="@android:color/white"
         app:showAsAction="always"/>
 
     <item

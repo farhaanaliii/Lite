@@ -1,12 +1,12 @@
 {
     "app_name": "Lite++",
     "package_name": "com.farhanali.lite",
-    "latest_version": "1.0.3",
+    "latest_version": "1.1.0",
     "latest_version_code": 4,
     "download_url": "https://github.com/farhaanaliii/Lite/releases/latest",
     "changelog": [
         {
-            "version": "1.0.3",
+            "version": "1.1.0",
             "version_code": 4,
             "release_date": "2025-12-24",
             "changes": [

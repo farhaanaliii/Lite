@@ -26,20 +26,24 @@ Lite++ is a lightweight and efficient browser built exclusively for Facebook. Un
 
 ## Screenshots
 
-(Add screenshots here)
-
-## Build with Android Studio
-
+<p align="center">
+  <img src="screenshots/Screenshot_20251224-180321.jpg" width="200" alt="Lite++ Screenshot 1"/>
+  <img src="screenshots/20251224_180615.jpg" width="200" alt="Lite++ Screenshot 2"/>
+</p>
 ### Requirements
+
 - Android Studio (latest version recommended)
 - Java Development Kit (JDK)
 - Android SDK and necessary dependencies
 
 ### Steps
+
 1. Clone the repository:
+
    ```sh
    git clone https://github.com/farhaanaliii/Lite.git
    ```
+
 2. Open Android Studio and select **Open an Existing Project**.
 3. Navigate to the cloned repository and open it.
 4. Allow Android Studio to sync and install dependencies.
@@ -56,4 +60,3 @@ Lite++ is open-source under the [MIT License](LICENSE).
 ---
 
 Made with ❤️ by [Farhan Ali](https://github.com/farhaanaliii)
-

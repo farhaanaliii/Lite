@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark mode Primary Colors - Keep Facebook Blue visible -->
+    <color name="md_theme_dark_primary">#1877F2</color>
+    <color name="md_theme_dark_onPrimary">#FFFFFF</color>
+    <color name="md_theme_dark_primaryContainer">#004493</color>
+    <color name="md_theme_dark_onPrimaryContainer">#D4E3FF</color>
+
+    <!-- Secondary Colors -->
+    <color name="md_theme_dark_secondary">#BEC6DC</color>
+    <color name="md_theme_dark_onSecondary">#283041</color>
+    <color name="md_theme_dark_secondaryContainer">#3E4759</color>
+    <color name="md_theme_dark_onSecondaryContainer">#DAE2F9</color>
+
+    <!-- Tertiary Colors -->
+    <color name="md_theme_dark_tertiary">#DDBCE0</color>
+    <color name="md_theme_dark_onTertiary">#3F2844</color>
+    <color name="md_theme_dark_tertiaryContainer">#573E5B</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FAD8FD</color>
+
+    <!-- Error Colors -->
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+
+    <!-- Background & Surface - True dark colors -->
+    <color name="md_theme_dark_background">#121212</color>
+    <color name="md_theme_dark_onBackground">#E6E1E5</color>
+    <color name="md_theme_dark_surface">#121212</color>
+    <color name="md_theme_dark_onSurface">#E6E1E5</color>
+    <color name="md_theme_dark_surfaceVariant">#49454F</color>
+    <color name="md_theme_dark_onSurfaceVariant">#CAC4D0</color>
+
+    <!-- Surface Container colors for elevated surfaces -->
+    <color name="md_theme_dark_surfaceContainer">#1E1E1E</color>
+    <color name="md_theme_dark_surfaceContainerHigh">#2B2B2B</color>
+    <color name="md_theme_dark_surfaceContainerHighest">#363636</color>
+
+    <!-- Outline & Misc -->
+    <color name="md_theme_dark_outline">#938F99</color>
+    <color name="md_theme_dark_outlineVariant">#49454F</color>
+    <color name="md_theme_dark_inverseSurface">#E6E1E5</color>
+    <color name="md_theme_dark_inverseOnSurface">#313033</color>
+    <color name="md_theme_dark_inversePrimary">#1877F2</color>
+
+    <!-- Legacy compatibility -->
+    <color name="colorPrimary">@color/md_theme_dark_primary</color>
+    <color name="colorPrimaryDark">#121212</color>
+    <color name="colorAccent">@color/md_theme_dark_primary</color>
+    <color name="colorOnPrimary">@color/md_theme_dark_onPrimary</color>
+</resources>

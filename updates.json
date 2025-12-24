@@ -1,14 +1,33 @@
 {
     "app_name": "Lite++",
     "package_name": "com.farhanali.lite",
-    "latest_version": "1.0.2",
-    "latest_version_code": 3,
+    "latest_version": "1.0.3",
+    "latest_version_code": 4,
     "download_url": "https://github.com/farhaanaliii/Lite/releases/latest",
     "changelog": [
         {
+            "version": "1.0.3",
+            "version_code": 4,
+            "release_date": "2025-12-24",
+            "changes": [
+                {
+                    "type": "feature",
+                    "description": "Added multi-format cookie support (String, Netscape, JSON Array, JSON Dictionary)"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Enhanced cookie dialogs with format selection and conversion"
+                },
+                {
+                    "type": "ui",
+                    "description": "Updated UI to Material Design 3 with improved UX"
+                }
+            ]
+        },
+        {
             "version": "1.0.2",
             "version_code": 3,
-            "release_date": "2024-01-15",
+            "release_date": "2025-11-20",
             "changes": [
                 {
                     "type": "fix",
@@ -23,7 +42,7 @@
         {
             "version": "1.0.1",
             "version_code": 2,
-            "release_date": "2024-01-10",
+            "release_date": "2025-03-01",
             "changes": [
                 {
                     "type": "fix",
@@ -34,7 +53,7 @@
         {
             "version": "1.0.0",
             "version_code": 1,
-            "release_date": "2024-01-01",
+            "release_date": "2024-03-01",
             "changes": [
                 {
                     "type": "feature",

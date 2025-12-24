@@ -11,7 +11,7 @@
     <string name="dev_yt">https://youtube.com/@TheAnonymous_ofc</string>
     <string name="dev_github">https://www.github.com/farhaanaliii/Lite/</string>
     <string name="dev_fb">https://www.facebook.com/i.farhanali.dev</string>
-    <string name="current_version">1.0.2</string>
+    <string name="current_version">1.0.3</string>
     <string name="menu_about">About</string>
     <string name="menu_current_url">See Current URL</string>
     <string name="no_internet">No Internet connection!</string>
@@ -29,4 +29,14 @@
     <string name="bugs_and_features">Report bugs or suggest features</string>
     <string name="check_for_updates">Check for updates</string>
     <string name="settings">Settings</string>
+
+    <string-array name="cookie_formats">
+        <item>String</item>
+        <item>Netscape</item>
+        <item>JSON Array</item>
+        <item>JSON Dictionary</item>
+    </string-array>
+
+    <string name="cookie_format">Cookie Format</string>
+    <string name="invalid_cookie_format">Invalid cookie format. Please check your input.</string>
 </resources>

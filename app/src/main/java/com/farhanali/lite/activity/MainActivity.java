@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity{
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
+        // Tint overflow icon white for visibility on blue toolbar
+        fixOverflowIconColor();
+
         settings = new Settings(context);
 
         progressBar = findViewById(R.id.progressBar);
@@ -172,5 +175,17 @@ public class MainActivity extends AppCompatActivity{
 
     public WebView getWebView(){
         return webView;
+    }
+
+    private void fixOverflowIconColor() {
+        try {
+            android.graphics.drawable.Drawable overflowIcon = toolbar.getOverflowIcon();
+            if (overflowIcon != null) {
+                overflowIcon.setTint(getResources().getColor(R.color.md_theme_light_onPrimary, getTheme()));
+                toolbar.setOverflowIcon(overflowIcon);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

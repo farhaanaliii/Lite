@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
 		setSupportActionBar(toolbar);
 
         // Tint overflow icon white for visibility on blue toolbar
-        fixOverflowIconColor();
+        fixOverflowIconColor(toolbar);
 
         settings = new Settings(context);
 
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity{
         return webView;
     }
 
-    private void fixOverflowIconColor() {
+    private void fixOverflowIconColor(MaterialToolbar toolbar) {
         try {
             android.graphics.drawable.Drawable overflowIcon = toolbar.getOverflowIcon();
             if (overflowIcon != null) {

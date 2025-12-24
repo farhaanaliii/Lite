@@ -4,19 +4,23 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:background="?android:attr/colorBackground">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/toolLayout"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+		android:background="?attr/colorPrimary">
 		
 		<com.google.android.material.appbar.MaterialToolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
-		    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+			android:background="?attr/colorPrimary"
+			app:titleTextColor="?attr/colorOnPrimary"
+			app:navigationIconTint="?attr/colorOnPrimary"
+			app:menu="@menu/web_menu"/>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressBar"
@@ -33,4 +37,3 @@
 		android:id="@+id/webView"/>
 	
 </LinearLayout>
-

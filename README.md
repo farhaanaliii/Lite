@@ -30,6 +30,8 @@ Lite++ is a lightweight and efficient browser built exclusively for Facebook. Un
   <img src="screenshots/Screenshot_20251224-180321.jpg" width="200" alt="Lite++ Screenshot 1"/>
   <img src="screenshots/20251224_180615.jpg" width="200" alt="Lite++ Screenshot 2"/>
 </p>
+
+
 ### Requirements
 
 - Android Studio (latest version recommended)

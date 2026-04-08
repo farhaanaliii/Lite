@@ -7,23 +7,13 @@
 	android:background="?attr/colorSurface">
 
 	<ImageView
-		android:src="@drawable/ic_icon_s"
-		android:layout_width="100dp"
-		android:layout_height="100dp"
-		android:layout_margin="16dp"
-		android:layout_centerVertical="true"
-		android:layout_centerHorizontal="true"
 		android:id="@+id/icon"
-		android:contentDescription="@string/app_name" />
-
-	<com.google.android.material.progressindicator.CircularProgressIndicator
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/icon"
-		android:layout_centerHorizontal="true"
-		android:layout_marginTop="24dp"
-		android:id="@+id/loader"
-		android:indeterminate="true"/>
+		android:layout_width="80dp"
+		android:layout_height="100dp"
+		android:layout_centerInParent="true"
+		android:layout_margin="16dp"
+		android:contentDescription="@string/app_name"
+		android:src="@drawable/ic_icon_s" />
 
 	<TextView
 		android:layout_width="wrap_content"

@@ -4,3 +4,30 @@ gradle
 release
 debug
 tmp
+
+# Gradle
+.gradle/
+build/
+app/build/
+local.properties
+
+# Android Studio / IntelliJ
+.idea/*
+!.idea/codeStyles
+!.idea/codeStyles/*
+!.idea/inspectionProfiles
+!.idea/inspectionProfiles/*
+!.idea/runConfigurations
+!.idea/runConfigurations/*
+
+# User-specific
+*.iml
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Keystore / secrets
+*.jks
+*.keystore
+google-services.json

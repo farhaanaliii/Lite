@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.farhanali.lite.R;
 import com.farhanali.lite.constant.Constant;
 import com.farhanali.lite.utils.Utils;
 import com.farhanali.lite.view.Dialogs;
@@ -49,7 +50,7 @@ public class UpdateChecker {
                 if (latestVersion != null && latestVersion.greaterThan(currentVersion)) {
                     showDialog();
                 } else {
-                    Utils.Toast(mContext, "You are using the latest version.");
+                    Utils.Toast(mContext, mContext.getString(R.string.latest_version));
                     Log.d("No Update", "No update available");
                 }
             });
@@ -58,7 +59,7 @@ public class UpdateChecker {
 
     private void checkUpdate() {
         ((AppCompatActivity) mContext).runOnUiThread(() -> {
-            Utils.Toast(mContext, "Checking for updates...");
+            Utils.Toast(mContext, mContext.getString(R.string.checking_updates));
         });
 
         StringBuilder responseBuilder = new StringBuilder();

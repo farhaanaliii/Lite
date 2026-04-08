@@ -31,7 +31,7 @@ public class Dialogs {
         final TextInputLayout textInputLayout = view.findViewById(R.id.text_input_layout);
         final Spinner formatSpinner = view.findViewById(R.id.format_spinner);
         
-        textInputLayout.setHint("Cookies");
+        textInputLayout.setHint(context.getString(R.string.cookies));
         editText.setFocusable(false);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -59,11 +59,11 @@ public class Dialogs {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        cookieDialog.setTitle("Cookies");
+        cookieDialog.setTitle(context.getString(R.string.cookies));
         cookieDialog.setView(view);
-        cookieDialog.setPositiveButton("Copy to Clipboard", (dialog, whichButton) -> {
+        cookieDialog.setPositiveButton(context.getString(R.string.copy_to_clipboard), (dialog, whichButton) -> {
             Utils.Copy(currentFormat[0], context);
-            Utils.Toast(context, "Copied!");
+            Utils.Toast(context, context.getString(R.string.copied));
         });
         cookieDialog.show();
     }
@@ -76,7 +76,7 @@ public class Dialogs {
         final TextInputLayout textInputLayout = view.findViewById(R.id.text_input_layout);
         final Spinner formatSpinner = view.findViewById(R.id.format_spinner);
         
-        textInputLayout.setHint("Cookies");
+        textInputLayout.setHint(context.getString(R.string.cookies));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
             context,
@@ -96,7 +96,7 @@ public class Dialogs {
                 String formatted = CookieFormatter.convertToFormat(currentCookies, position, ".facebook.com");
                 editText.setText(formatted);
                 
-                String[] hints = {"name1=value1; name2=value2", "Netscape format", "JSON Array format", "JSON Dictionary format"};
+                String[] hints = {context.getString(R.string.hint_string_format), context.getString(R.string.hint_netscape_format), context.getString(R.string.hint_json_array_format), context.getString(R.string.hint_json_dict_format)};
                 if (position < hints.length) {
                     textInputLayout.setHint(hints[position]);
                 }
@@ -106,14 +106,14 @@ public class Dialogs {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        cookieDialog.setTitle("Edit Cookies");
+        cookieDialog.setTitle(context.getString(R.string.edit_cookies));
         cookieDialog.setView(view);
-        cookieDialog.setPositiveButton("Save Cookies", (dialog, whichButton) -> {
+        cookieDialog.setPositiveButton(context.getString(R.string.save_cookies), (dialog, whichButton) -> {
             if (editText.getText() != null) {
                 String inputText = editText.getText().toString().trim();
                 
                 if (inputText.isEmpty()) {
-                    Utils.Toast(context, "Cookies cannot be empty!");
+                    Utils.Toast(context, context.getString(R.string.cookies_empty));
                     return;
                 }
                 
@@ -148,7 +148,7 @@ public class Dialogs {
                         }
                     }
                     
-                    Utils.Toast(context, "Cookies Saved!");
+                    Utils.Toast(context, context.getString(R.string.cookies_saved));
                     webView.loadUrl(Constant.FACEBOOK_HOME);
                     
                 } catch (Exception e) {
@@ -157,7 +157,7 @@ public class Dialogs {
                 }
             }
         });
-        cookieDialog.setNegativeButton("Cancel", null);
+        cookieDialog.setNegativeButton(android.R.string.cancel, null);
         cookieDialog.show();
     }
 
@@ -166,18 +166,18 @@ public class Dialogs {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_edittext, null);
         final TextInputEditText editText = view.findViewById(R.id.edit_text);
         final TextInputLayout textInputLayout = view.findViewById(R.id.text_input_layout);
-        textInputLayout.setHint("Current URL");
+        textInputLayout.setHint(context.getString(R.string.current_url));
 
         editText.setText(url);
         editText.setFocusable(false);
 
-        urlDialog.setTitle("Current URL");
+        urlDialog.setTitle(context.getString(R.string.current_url));
         urlDialog.setView(view);
-        urlDialog.setPositiveButton("Copy", (dialog, whichButton) -> {
+        urlDialog.setPositiveButton(android.R.string.copy, (dialog, whichButton) -> {
             Utils.Copy(url, context);
-            Utils.Toast(context, "Copied!");
+            Utils.Toast(context, context.getString(R.string.copied));
         });
-        urlDialog.setNegativeButton("Cancel", null);
+        urlDialog.setNegativeButton(android.R.string.cancel, null);
         urlDialog.show();
     }
 
@@ -189,13 +189,13 @@ public class Dialogs {
             JSONArray changelog = json.getJSONArray("changelog");
             
             SpannableStringBuilder message = new SpannableStringBuilder();
-            message.append("Version ").append(latestVersion).append(" is available!\n\n");
+            message.append(context.getString(R.string.version_available, latestVersion)).append("\n\n");
             
             for (int i = 0; i < changelog.length(); i++) {
                 JSONObject release = changelog.getJSONObject(i);
                 if (release.getString("version").equals(latestVersion)) {
                     JSONArray changes = release.getJSONArray("changes");
-                    message.append("What's new:\n");
+                    message.append(context.getString(R.string.whats_new)).append("\n");
                     
                     for (int j = 0; j < changes.length(); j++) {
                         JSONObject change = changes.getJSONObject(j);
@@ -211,23 +211,23 @@ public class Dialogs {
                 }
             }
             
-            message.append("\nWould you like to download the update?");
+            message.append("\n").append(context.getString(R.string.download_update_prompt));
             
             new MaterialAlertDialogBuilder(context)
-                .setTitle("Update Available")
+                .setTitle(context.getString(R.string.update_available))
                 .setMessage(message)
-                .setPositiveButton("Download", (dialog, which) -> {
+                .setPositiveButton(context.getString(R.string.download), (dialog, which) -> {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl));
                     context.startActivity(browserIntent);
                 })
-                .setNegativeButton("Later", null)
+                .setNegativeButton(context.getString(R.string.later), null)
                 .show();
                 
         } catch (Exception e) {
             new MaterialAlertDialogBuilder(context)
-                .setTitle("Update Available")
-                .setMessage("A new version is available!")
-                .setPositiveButton("OK", null)
+                .setTitle(context.getString(R.string.update_available))
+                .setMessage(context.getString(R.string.new_version_available))
+                .setPositiveButton(android.R.string.ok, null)
                 .show();
         }
     }

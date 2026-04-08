@@ -26,7 +26,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (clearCachePref != null) {
             clearCachePref.setOnPreferenceClickListener(preference -> {
                 Utils.clearCache(requireContext());
-                Utils.Toast(getContext(), "WebView cache cleared!");
+                Utils.Toast(getContext(), getString(R.string.cache_cleared));
                 return true;
             });
         }
@@ -35,7 +35,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (clearStoragePref != null) {
             clearStoragePref.setOnPreferenceClickListener(preference -> {
                 Utils.clearData(requireContext());
-                Utils.Toast(getContext(), "WebView storage cleared!");
+                Utils.Toast(getContext(), getString(R.string.storage_cleared));
                 return true;
             });
         }
@@ -47,7 +47,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 //MainActivity.getWebView().getSettings().setUserAgentString(settings.getUserAgent());
                 settings.setJavaScriptEnabled(true);
                 //MainActivity.getWebView().getSettings().setJavaScriptEnabled(true);
-                Utils.Toast(getContext(), "Settings reset to default!");
+                Utils.Toast(getContext(), getString(R.string.settings_reset));
                 return true;
             });
         }
@@ -60,7 +60,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 String newUserAgent = (String) newValue;
                 settings.saveCustomUserAgent(newUserAgent);
                 //MainActivity.getWebView().getSettings().setUserAgentString(newUserAgent);
-                Utils.Toast(getContext(), "User-Agent updated!");
+                Utils.Toast(getContext(), getString(R.string.user_agent_updated));
                 return true;
             });
         }
@@ -72,7 +72,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 boolean isEnabled = (Boolean) newValue;
                 settings.setJavaScriptEnabled(isEnabled);
                 //MainActivity.getWebView().getSettings().setJavaScriptEnabled(isEnabled);
-                Utils.Toast(getContext(), "JavaScript setting updated!");
+                Utils.Toast(getContext(), getString(R.string.javascript_updated));
                 return true;
             });
         }

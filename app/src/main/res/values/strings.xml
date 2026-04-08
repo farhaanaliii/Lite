@@ -39,4 +39,38 @@
 
     <string name="cookie_format">Cookie Format</string>
     <string name="invalid_cookie_format">Invalid cookie format. Please check your input.</string>
+
+    <!-- Dialogs -->
+    <string name="cookies">Cookies</string>
+    <string name="copy_to_clipboard">Copy to Clipboard</string>
+    <string name="copied">Copied!</string>
+    <string name="save_cookies">Save Cookies</string>
+    <string name="cookies_empty">Cookies cannot be empty!</string>
+    <string name="cookies_saved">Cookies Saved!</string>
+    <string name="current_url">Current URL</string>
+    <string name="hint_string_format">name1=value1; name2=value2</string>
+    <string name="hint_netscape_format">Netscape format</string>
+    <string name="hint_json_array_format">JSON Array format</string>
+    <string name="hint_json_dict_format">JSON Dictionary format</string>
+
+    <!-- Update -->
+    <string name="update_available">Update Available</string>
+    <string name="version_available">Version %s is available!</string>
+    <string name="whats_new">What\'s new:</string>
+    <string name="download_update_prompt">Would you like to download the update?</string>
+    <string name="download">Download</string>
+    <string name="later">Later</string>
+    <string name="new_version_available">A new version is available!</string>
+    <string name="latest_version">You are using the latest version.</string>
+    <string name="checking_updates">Checking for updates…</string>
+
+    <!-- Settings toasts -->
+    <string name="cache_cleared">WebView cache cleared!</string>
+    <string name="storage_cleared">WebView storage cleared!</string>
+    <string name="settings_reset">Settings reset to default!</string>
+    <string name="user_agent_updated">User-Agent updated!</string>
+    <string name="javascript_updated">JavaScript setting updated!</string>
+
+    <!-- Crash -->
+    <string name="no_crash_info">No crash information available.</string>
 </resources>

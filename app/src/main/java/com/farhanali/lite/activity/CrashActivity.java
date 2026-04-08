@@ -30,7 +30,7 @@ public class CrashActivity extends AppCompatActivity implements MenuItem.OnMenuI
         crashLog = getIntent().getStringExtra(EXTRA_CRASH_INFO);
 
         TextView logText = findViewById(R.id.logText);
-        logText.setText(crashLog != null ? crashLog : "No crash information available.");
+        logText.setText(crashLog != null ? crashLog : getString(R.string.no_crash_info));
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override

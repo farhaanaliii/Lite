@@ -1,4 +1,23 @@
-# Lite++
+<div align="center">
+  <img src="assets/icon.png" width="120" alt="Lite++ Logo">
+  <h1>Lite++</h1>
+
+  <p>
+    <a href="https://github.com/farhaanaliii/Lite/releases">
+      <img src="https://img.shields.io/github/v/release/farhaanaliii/Lite?style=flat-square&color=1877F2" alt="Latest Release">
+    </a>
+    <a href="https://github.com/farhaanaliii/Lite/stargazers">
+      <img src="https://img.shields.io/github/stars/farhaanaliii/Lite?style=flat-square&color=FF4081" alt="Stars">
+    </a>
+    <a href="LICENSE">
+      <img src="https://img.shields.io/github/license/farhaanaliii/Lite?style=flat-square" alt="License">
+    </a>
+  </p>
+
+  <p><em>A lightweight and efficient browser wrapper built exclusively for Facebook.</em></p>
+</div>
+
+<br/>
 
 Lite++ is a lightweight and efficient browser built exclusively for Facebook. Unlike traditional browsers, it is designed solely for navigating Facebook, ensuring an optimized and feature-rich experience tailored specifically for the platform.
 

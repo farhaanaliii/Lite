@@ -9,8 +9,8 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class LiteWebViewClient extends WebViewClient{
     private final LinearProgressIndicator progressBar;
-    public LiteWebViewClient(LinearProgressIndicator mprogressBar){
-        progressBar = mprogressBar;
+    public LiteWebViewClient(LinearProgressIndicator progressBar){
+        this.progressBar = progressBar;
     }
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {

@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity{
         webSettings.setJavaScriptEnabled(settings.isJavaScriptEnabled());
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false);
+        webView.setBackgroundColor(android.graphics.Color.TRANSPARENT);
         webView.setWebViewClient(new LiteWebViewClient(progressBar));
         webView.setWebChromeClient(new WebChromeClient(){
             @Override

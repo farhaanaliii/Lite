@@ -38,15 +38,32 @@ public class Utils {
     }
 
     public static void clearCache(Context context){
-        WebView webView = new WebView(context);
-        webView.clearCache(true);
+        context.deleteDatabase("webview.db");
+        context.deleteDatabase("webviewCache.db");
+        // Clear app cache directory
+        java.io.File cacheDir = context.getCacheDir();
+        if (cacheDir != null && cacheDir.isDirectory()) {
+            deleteDir(cacheDir);
+        }
     }
 
     public static void clearData(Context context){
-        WebView webView = new WebView(context);
-        webView.clearHistory();
-        webView.clearFormData();
-        webView.clearCache(true);
+        clearCache(context);
         WebStorage.getInstance().deleteAllData();
+        CookieManager.getInstance().removeAllCookies(null);
+        CookieManager.getInstance().flush();
+    }
+
+    private static void deleteDir(java.io.File dir) {
+        if (dir == null || !dir.isDirectory()) return;
+        java.io.File[] children = dir.listFiles();
+        if (children != null) {
+            for (java.io.File child : children) {
+                if (child.isDirectory()) {
+                    deleteDir(child);
+                }
+                child.delete();
+            }
+        }
     }
 }

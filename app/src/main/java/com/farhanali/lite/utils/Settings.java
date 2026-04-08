@@ -46,6 +46,14 @@ public class Settings {
         editor.putBoolean(Constant.PREF_KEY_JAVASCRIPT, isEnabled).apply();
     }
 
+    public String getTheme() {
+        return sharedPreferences.getString(Constant.PREF_KEY_THEME, "system");
+    }
+
+    public void setTheme(String theme) {
+        editor.putString(Constant.PREF_KEY_THEME, theme).apply();
+    }
+
     public void clearCache() {
         editor.remove(Constant.PREF_KEY_CACHE).apply();
     }

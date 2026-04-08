@@ -37,6 +37,18 @@
         <item>JSON Dictionary</item>
     </string-array>
 
+    <string-array name="theme_entries">
+        <item>System Default</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+    
+    <string-array name="theme_values">
+        <item>system</item>
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
+
     <string name="cookie_format">Cookie Format</string>
     <string name="invalid_cookie_format">Invalid cookie format. Please check your input.</string>
 

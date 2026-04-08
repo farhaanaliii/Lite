@@ -6,7 +6,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import com.farhanali.lite.R;
+import com.farhanali.lite.app.App;
 import com.farhanali.lite.activity.MainActivity;
 import com.farhanali.lite.constant.Constant;
 import com.farhanali.lite.utils.Settings;
@@ -19,8 +21,19 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        getPreferenceManager().setSharedPreferencesName(Constant.SHARED_PREFS);
         setPreferencesFromResource(R.xml.activity_settings, rootKey);
         settings = new Settings(requireContext());
+
+        ListPreference themePref = findPreference(Constant.PREF_KEY_THEME);
+        if (themePref != null) {
+            themePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                String theme = (String) newValue;
+                settings.setTheme(theme);
+                App.applyTheme(theme);
+                return true;
+            });
+        }
 
         Preference clearCachePref = findPreference(Constant.PREF_KEY_CACHE);
         if (clearCachePref != null) {

@@ -5,6 +5,15 @@
     <PreferenceCategory
         android:title="General Settings">
 
+        <ListPreference
+            android:key="pref_theme"
+            android:title="App Theme"
+            android:summary="Choose between System, Light, or Dark"
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_values"
+            android:defaultValue="system"
+            app:icon="@drawable/baseline_color_lens_24" />
+
         <EditTextPreference
             android:key="pref_custom_user_agent"
             android:title="Custom User-Agent"

@@ -13,5 +13,6 @@ public class Constant {
 	public static final String PREF_KEY_CACHE = "pref_cache";
 	public static final String PREF_KEY_DATA = "pref_data";
 	public static final String PREF_KEY_RESET = "pref_reset";
+	public static final String PREF_KEY_THEME = "pref_theme";
 
 }

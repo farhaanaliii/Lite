@@ -248,6 +248,22 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (webView != null) {
+            webView.onPause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (webView != null) {
+            webView.onResume();
+        }
+    }
+
     public WebView getWebView(){
         return webView;
     }

@@ -233,14 +233,14 @@ public class Dialogs {
     }
 
     private static String getChangeIcon(String type) {
-        switch (type) {
-            case "feature": return "✨"; // New feature
-            case "fix": return "🐛";     // Bug fix  
-            case "improvement": return "⚡"; // Improvement
-            case "security": return "🔒"; // Security fix
-            case "performance": return "🚀"; // Performance
-            case "ui": return "🎨";      // UI/UX change
-            default: return "•";
-        }
+        return switch (type) {
+            case "feature" -> "✨"; // New feature
+            case "fix" -> "🐛";     // Bug fix
+            case "improvement" -> "⚡"; // Improvement
+            case "security" -> "🔒"; // Security fix
+            case "performance" -> "🚀"; // Performance
+            case "ui" -> "🎨";      // UI/UX change
+            default -> "•";
+        };
     }
 }

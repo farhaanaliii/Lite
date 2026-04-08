@@ -1,5 +1,6 @@
 package com.farhanali.lite.activity;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
@@ -102,6 +103,17 @@ public class MainActivity extends AppCompatActivity{
         }
 
         webView.loadUrl(Constant.FACEBOOK_HOME);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    finish();
+                }
+            }
+        });
     }
 
     @Override

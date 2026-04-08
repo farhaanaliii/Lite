@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.farhanali.lite.R;
@@ -30,12 +31,14 @@ public class CrashActivity extends AppCompatActivity implements MenuItem.OnMenuI
 
         TextView logText = findViewById(R.id.logText);
         logText.setText(crashLog != null ? crashLog : "No crash information available.");
-    }
 
-    @Override
-    public void onBackPressed(){
-        // Close the activity on back press to prevent crash loop
-        finish();
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Close the activity on back press to prevent crash loop
+                finish();
+            }
+        });
     }
 
     @Override

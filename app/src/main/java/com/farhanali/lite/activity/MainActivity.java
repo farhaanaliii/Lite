@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity{
         cookieManager.setAcceptCookie(true);
         
         userAgent = settings.getUserAgent();
-        if(userAgent.equals("")){
+        if(userAgent.isEmpty()){
             userAgent = webSettings.getUserAgentString();
             settings.saveUserAgent(userAgent);
         }
 
-        if(!settings.getCustomUserAgent().equals("")){
+        if(!settings.getCustomUserAgent().isEmpty()){
             userAgent = settings.getCustomUserAgent();
         }
 

@@ -42,6 +42,28 @@ public class MainActivity extends AppCompatActivity{
             recreate();
         });
 
+    private android.webkit.ValueCallback<android.net.Uri[]> mFilePathCallback;
+    private final ActivityResultLauncher<Intent> fileChooserLauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            if (mFilePathCallback != null) {
+                android.net.Uri[] results = null;
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    if (result.getData().getClipData() != null) {
+                        int count = result.getData().getClipData().getItemCount();
+                        results = new android.net.Uri[count];
+                        for (int i = 0; i < count; i++) {
+                            results[i] = result.getData().getClipData().getItemAt(i).getUri();
+                        }
+                    } else if (result.getData().getData() != null) {
+                        results = new android.net.Uri[]{result.getData().getData()};
+                    }
+                }
+                mFilePathCallback.onReceiveValue(results);
+                mFilePathCallback = null;
+            }
+        });
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -90,6 +112,23 @@ public class MainActivity extends AppCompatActivity{
             public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             progressBar.setProgress(newProgress, true);
+            }
+
+            @Override
+            public boolean onShowFileChooser(WebView webView, android.webkit.ValueCallback<android.net.Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                if (mFilePathCallback != null) {
+                    mFilePathCallback.onReceiveValue(null);
+                }
+                mFilePathCallback = filePathCallback;
+
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("*/*");
+                if (fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE) {
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                }
+                fileChooserLauncher.launch(Intent.createChooser(intent, "Select File"));
+                return true;
             }
         });
 

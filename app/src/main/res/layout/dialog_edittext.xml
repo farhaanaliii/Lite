@@ -8,12 +8,20 @@
     android:paddingTop="20dp"
     android:paddingBottom="0dp">
 
-    <Spinner
-        android:id="@+id/format_spinner"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:minHeight="48dp" />
+        android:background="@drawable/spinner_border"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/format_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:popupBackground="?attr/colorSurface" />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout"

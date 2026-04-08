@@ -7,6 +7,8 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.farhanali.lite.fragment.AboutFragment;
 import com.farhanali.lite.R;
 
+import java.util.Objects;
+
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +16,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportFragmentManager()
             .beginTransaction()

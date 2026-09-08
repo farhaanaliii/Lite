@@ -1,13 +1,4 @@
 <div align="center">
-  <a href="https://github.com/Safouene1/support-palestine-banner/blob/master/Markdown-pages/Support.md">
-    <img src="https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/banner-project.svg" alt="Support Palestine" style="width: 100%;" />
-  </a>
-</div>
-
-> [!CAUTION]
-> Free and Open-Source Android is under threat. Google will turn Android into a locked-down platform, restricting your essential freedom to install apps of your choice. Make your voice heard – [keepandroidopen.org](https://keepandroidopen.org/).
-
-<div align="center">
   <img src="assets/icon.png" width="120" alt="Lite++ Logo">
   <h1>Lite++</h1>
 
@@ -27,6 +18,15 @@
 </div>
 
 <br/>
+<div align="center">
+  <a href="https://github.com/Safouene1/support-palestine-banner/blob/master/Markdown-pages/Support.md">
+    <img src="https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/banner-project.svg" alt="Support Palestine" style="width: 100%;" />
+  </a>
+</div>
+
+> [!CAUTION]
+> Free and Open-Source Android is under threat. Google will turn Android into a locked-down platform, restricting your essential freedom to install apps of your choice. Make your voice heard – [keepandroidopen.org](https://keepandroidopen.org/).
+
 
 Lite++ is a lightweight and efficient browser built exclusively for Facebook. Unlike traditional browsers, it is designed solely for navigating Facebook, ensuring an optimized and feature-rich exp[...]
 

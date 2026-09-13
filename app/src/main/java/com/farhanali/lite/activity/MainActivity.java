@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity{
             Dialogs.showEditCookiesDialog(context, webView, cookieManager);
         } else if (id == R.id.checkupdates) {
             if(Utils.isInternetOn(context)){
-                new UpdateChecker(context).execute();
+                UpdateChecker.check(context);
             }else{
                 Utils.Toast(context, getString(R.string.no_internet));
             }
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity{
         if(!hasCheckedUpdate){
             hasCheckedUpdate = true;
             if(Utils.isInternetOn(context)){
-                new UpdateChecker(context).execute();
+                UpdateChecker.check(context);
             }else{
                 Utils.Toast(context, getString(R.string.no_internet));
             }

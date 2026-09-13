@@ -3,12 +3,11 @@ package com.farhanali.lite.service;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.pm.PackageInfoCompat;
 
 import com.farhanali.lite.R;
 import com.farhanali.lite.constant.Constant;
@@ -21,82 +20,94 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import com.github.zafarkhaja.semver.Version;
 
 public class UpdateChecker {
-    private Version currentVersion;
-    private Version latestVersion;
-    private String jsonResponse;
-    private final Context mContext;
-    private final ExecutorService executor;
+    private static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
+    private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
+
+    private final Context context;
 
     public UpdateChecker(Context context) {
-        mContext = context;
-        executor = Executors.newSingleThreadExecutor();
-        try {
-            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            currentVersion = Version.valueOf(pInfo.versionName);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.context = context;
     }
 
     public void execute() {
-        executor.execute(() -> {
-            checkUpdate();
-            new Handler(Looper.getMainLooper()).post(() -> {
-                if (latestVersion != null && latestVersion.greaterThan(currentVersion)) {
-                    showDialog();
-                } else {
-                    Utils.Toast(mContext, mContext.getString(R.string.latest_version));
-                    Log.d("No Update", "No update available");
-                }
-            });
+        check(context);
+    }
+
+    public static void check(Context context) {
+        Utils.Toast(context, context.getString(R.string.checking_updates));
+        EXECUTOR.execute(() -> {
+            String jsonStr = fetchJson();
+            MAIN_HANDLER.post(() -> onResult(context, jsonStr));
         });
     }
 
-    private void checkUpdate() {
-        ((AppCompatActivity) mContext).runOnUiThread(() -> {
-            Utils.Toast(mContext, mContext.getString(R.string.checking_updates));
-        });
-
-        StringBuilder responseBuilder = new StringBuilder();
+    private static void onResult(Context context, String jsonStr) {
+        if (jsonStr == null) {
+            Utils.Toast(context, context.getString(R.string.no_internet));
+            return;
+        }
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(Constant.VERSION_URL).openConnection();
-            connection.setRequestMethod("GET");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        responseBuilder.append(line);
-                    }
-                }
+            JSONObject json = new JSONObject(jsonStr);
+            PackageInfo pInfo = getPackageInfo(context);
+            long currentCode = pInfo != null ? PackageInfoCompat.getLongVersionCode(pInfo) : 0;
+            if (isUpdateAvailable(currentCode, json)) {
+                Dialogs.showUpdateDialog(context, jsonStr);
             } else {
-                Log.e("UpdateChecker", "Network Error, Response Code: " + connection.getResponseCode());
+                Utils.Toast(context, context.getString(R.string.latest_version));
             }
         } catch (Exception e) {
-            Log.e("UpdateChecker", "Failed to fetch version data", e);
-        }
-
-        try {
-            jsonResponse = responseBuilder.toString();
-            JSONObject jsonObject = new JSONObject(jsonResponse);
-            latestVersion = Version.valueOf(jsonObject.getString("latest_version"));
-        } catch (Exception e) {
-            Log.e("UpdateChecker", "Failed to parse version JSON", e);
+            Utils.Toast(context, context.getString(R.string.update_check_failed));
         }
     }
 
-    private void showDialog() {
-        Log.d("Check Result", "Check completed");
-        ((AppCompatActivity) mContext).runOnUiThread(() -> {
-            Log.d("Update Available", "A new version is available");
-            Dialogs.showUpdateDialog(mContext, jsonResponse);
-        });
+    private static boolean isUpdateAvailable(long currentCode, JSONObject json) {
+        long latestCode = json.optLong("latest_version_code", -1);
+        return currentCode > 0 && latestCode > currentCode;
+    }
+
+    private static PackageInfo getPackageInfo(Context context) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                return context.getPackageManager().getPackageInfo(
+                    context.getPackageName(),
+                    PackageManager.PackageInfoFlags.of(0)
+                );
+            }
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private static String fetchJson() {
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) new URL(Constant.VERSION_URL).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                return sb.toString();
+            }
+        } catch (Exception ignored) {
+            return null;
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
     }
 }

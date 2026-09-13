@@ -27,66 +27,54 @@
 > [!CAUTION]
 > Free and Open-Source Android is under threat. Google will turn Android into a locked-down platform, restricting your essential freedom to install apps of your choice. Make your voice heard – [keepandroidopen.org](https://keepandroidopen.org/).
 
-
-Lite++ is a lightweight and efficient browser built exclusively for Facebook. Unlike traditional browsers, it is designed solely for navigating Facebook, ensuring an optimized and feature-rich exp[...]
+Lite++ is a lightweight Android browser wrapper for Facebook with built-in cookie tools and desktop mode.
 
 ## Features
 
-- **Desktop Mode**: Browse Facebook in desktop mode for a full web experience.
-- **Edit Cookies**: Modify Facebook cookies directly within the application.
-- **Extract Cookies**: Retrieve and manage cookies for various purposes.
-- **Lightweight**: Optimized for performance, ensuring smooth usage without unnecessary overhead.
+- Desktop mode toggle
+- Cookie extraction (String, Netscape, JSON) and editing
+- Custom User-Agent configuration
+- Dark, light, and system theme support
 
 ## Installation
 
-### Android
-
-1. Download the latest APK from the [Releases](https://github.com/farhaanaliii/Lite/releases) section.
+1. Download the latest APK from the [Releases](https://github.com/farhaanaliii/Lite/releases) page.
 2. Install the APK on your Android device.
-3. Open Lite++ and enjoy a streamlined Facebook experience.
-
-## Usage
-
-1. Launch Lite++.
-2. Log in to your Facebook account.
-3. Use the menu to access features such as **Desktop Mode, Edit Cookies, and Extract Cookies**.
-4. Toggle between mobile and desktop mode as needed.
+3. Launch Lite++ and log in to Facebook.
 
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/Screenshot_20251224-180321.jpg" width="200" alt="Lite++ Screenshot 1"/>
-  <img src="screenshots/20251224_180615.jpg" width="200" alt="Lite++ Screenshot 2"/>
+  <img src="screenshots/Screenshot_20251224-180321.jpg" width="220" alt="Lite++ Screenshot 1"/>
+  <img src="screenshots/20251224_180615.jpg" width="220" alt="Lite++ Screenshot 2"/>
 </p>
 
+## Building from Source
 
 ### Requirements
 
-- Android Studio (latest version recommended)
-- Java Development Kit (JDK)
-- Android SDK and necessary dependencies
+- Android Studio Ladybug (or newer)
+- JDK 17
+- Android SDK (API 34+)
 
 ### Steps
 
 1. Clone the repository:
-
    ```sh
    git clone https://github.com/farhaanaliii/Lite.git
    ```
-
-2. Open Android Studio and select **Open an Existing Project**.
-3. Navigate to the cloned repository and open it.
-4. Allow Android Studio to sync and install dependencies.
-5. Build and run the project on an emulator or a physical device.
+2. Open Android Studio and select **Open**.
+3. Select the cloned repository root and allow Gradle to sync dependencies.
+4. Run the `app` configuration on an emulator or connected device.
 
 ## Contributing
 
-Contributions are welcome! If you have suggestions, feel free to open an issue or submit a pull request.
+Contributions, bug reports, and feature suggestions are welcome via issues and pull requests.
 
 ## License
 
-Lite++ is open-source under the [MIT License](LICENSE).
+Lite++ is open-source software licensed under the [MIT License](LICENSE).
 
 ---
 
-Made with ❤️ by [Farhan Ali](https://github.com/farhaanaliii)
+Maintained by [Farhan Ali](https://github.com/farhaanaliii)

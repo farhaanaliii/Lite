@@ -1,14 +1,14 @@
 {
   "name": "Lite++",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "changes": [
     {
-      "type": "fix",
-      "description": "Fixed user agent settings not applying to WebView"
+      "type": "feature",
+      "description": "Added multi-format cookie support"
     },
     {
-      "type": "fix",
-      "description": "Prevented duplicate update checks after settings changes"
+      "type": "ui",
+      "description": "Updated UI to Material Design 3"
     }
   ]
 }

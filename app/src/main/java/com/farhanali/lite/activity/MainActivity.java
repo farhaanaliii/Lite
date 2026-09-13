@@ -14,7 +14,6 @@ import com.farhanali.lite.constant.Constant;
 import android.webkit.WebSettings;
 import com.farhanali.lite.service.LiteWebViewClient;
 import android.webkit.WebChromeClient;
-import com.farhanali.lite.service.LiteDesktopWebViewClient;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -28,7 +27,8 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class MainActivity extends AppCompatActivity{
     WebView webView;
-	WebSettings webSettings;
+    WebSettings webSettings;
+    LiteWebViewClient webViewClient;
     LinearProgressIndicator progressBar;
     boolean isDesktopMode;
     String userAgent;
@@ -126,7 +126,8 @@ public class MainActivity extends AppCompatActivity{
         androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(() -> webView.reload());
 
-        webView.setWebViewClient(new LiteWebViewClient(progressBar));
+        webViewClient = new LiteWebViewClient(progressBar, isDesktopMode);
+        webView.setWebViewClient(webViewClient);
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -162,7 +163,6 @@ public class MainActivity extends AppCompatActivity{
             webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
             webView.setScrollbarFadingEnabled(false);
             webSettings.setUserAgentString(Constant.DESKTOP_USERAGENT);
-            webView.setWebViewClient(new LiteDesktopWebViewClient(progressBar, webView));
         }
 
         webView.loadUrl(Constant.FACEBOOK_HOME);
@@ -222,12 +222,11 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
     private void desktopMode(MenuItem item) {
-        webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
-
         boolean isDesktopEnabled = !item.isChecked();
+        webSettings.setUseWideViewPort(isDesktopEnabled);
+        webSettings.setLoadWithOverviewMode(isDesktopEnabled);
         webSettings.setUserAgentString(isDesktopEnabled ? Constant.DESKTOP_USERAGENT : userAgent);
-        webView.setWebViewClient(isDesktopEnabled ? new LiteDesktopWebViewClient(progressBar, webView) : new LiteWebViewClient(progressBar));
+        webViewClient.setDesktopMode(isDesktopEnabled);
         webView.loadUrl(Constant.FACEBOOK_HOME);
 
         isDesktopMode = isDesktopEnabled;

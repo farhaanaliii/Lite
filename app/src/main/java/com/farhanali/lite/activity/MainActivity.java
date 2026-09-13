@@ -201,6 +201,9 @@ public class MainActivity extends AppCompatActivity{
         else if(id == R.id.home) {
             webView.loadUrl(Constant.FACEBOOK_HOME);
         }
+        else if(id == R.id.refresh) {
+            webView.reload();
+        }
         else if(id == R.id.desktop_mode){
             desktopMode(item);
         }

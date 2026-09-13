@@ -1,16 +1,16 @@
-package com.farhanali.lite.activity;
+package com.farhanali.lite.crash;
 
-import android.os.Bundle;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import androidx.activity.OnBackPressedCallback;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import com.farhanali.lite.R;
-import com.farhanali.lite.utils.Utils;
 
+import com.farhanali.lite.R;
+import com.farhanali.lite.ui.Utils;
 
 public class CrashActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     public static final String EXTRA_CRASH_INFO = "crashInfo";
@@ -31,14 +31,6 @@ public class CrashActivity extends AppCompatActivity implements MenuItem.OnMenuI
 
         TextView logText = findViewById(R.id.logText);
         logText.setText(crashLog != null ? crashLog : getString(R.string.no_crash_info));
-
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                // Close the activity on back press to prevent crash loop
-                finish();
-            }
-        });
     }
 
     @Override

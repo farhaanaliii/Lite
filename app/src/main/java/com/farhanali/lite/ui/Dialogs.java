@@ -1,4 +1,4 @@
-package com.farhanali.lite.view;
+package com.farhanali.lite.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,16 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebView;
-import android.widget.Spinner;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.farhanali.lite.Constant;
 import com.farhanali.lite.R;
-import com.farhanali.lite.constant.Constant;
-import com.farhanali.lite.utils.Utils;
-import com.farhanali.lite.utils.CookieFormatter;
+import com.farhanali.lite.web.CookieFormatter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

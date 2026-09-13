@@ -1,10 +1,9 @@
-package com.farhanali.lite.activity;
+package com.farhanali.lite.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.android.material.appbar.MaterialToolbar;
 
-import com.farhanali.lite.fragment.AboutFragment;
 import com.farhanali.lite.R;
 
 import java.util.Objects;

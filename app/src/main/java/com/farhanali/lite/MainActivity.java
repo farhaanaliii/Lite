@@ -1,28 +1,30 @@
-package com.farhanali.lite.activity;
+package com.farhanali.lite;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.webkit.WebView;
-import android.webkit.CookieManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import com.farhanali.lite.R;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.farhanali.lite.utils.Utils;
-import com.farhanali.lite.constant.Constant;
-import android.webkit.WebSettings;
-import com.farhanali.lite.service.LiteWebViewClient;
-import android.webkit.WebChromeClient;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
-import com.farhanali.lite.service.UpdateChecker;
-import android.content.Context;
-import com.farhanali.lite.utils.Settings;
-import com.farhanali.lite.view.Dialogs;
+import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.farhanali.lite.settings.AboutActivity;
+import com.farhanali.lite.settings.Settings;
+import com.farhanali.lite.settings.SettingsActivity;
+import com.farhanali.lite.ui.Dialogs;
+import com.farhanali.lite.ui.Utils;
+import com.farhanali.lite.update.UpdateChecker;
+import com.farhanali.lite.web.LiteWebViewClient;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class MainActivity extends AppCompatActivity{

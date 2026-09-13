@@ -1,7 +1,10 @@
-package com.farhanali.lite.app;
+package com.farhanali.lite;
 
 import android.app.Application;
-import com.farhanali.lite.utils.CrashHandler;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import com.farhanali.lite.crash.CrashHandler;
+import com.farhanali.lite.settings.Settings;
 
 public class App extends Application {
     private static App app;
@@ -9,7 +12,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        applyTheme(new com.farhanali.lite.utils.Settings(this).getTheme());
+        applyTheme(new Settings(this).getTheme());
         CrashHandler.init(this);
     }
     

@@ -1,4 +1,4 @@
-package com.farhanali.lite.fragment;
+package com.farhanali.lite.settings;
 
 import androidx.preference.PreferenceFragmentCompat;
 import android.os.Bundle;

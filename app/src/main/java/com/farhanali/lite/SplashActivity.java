@@ -1,4 +1,4 @@
-package com.farhanali.lite.activity;
+package com.farhanali.lite;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;

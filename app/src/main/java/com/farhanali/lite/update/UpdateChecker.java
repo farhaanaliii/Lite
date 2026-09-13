@@ -1,4 +1,4 @@
-package com.farhanali.lite.service;
+package com.farhanali.lite.update;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -9,10 +9,10 @@ import android.os.Looper;
 
 import androidx.core.content.pm.PackageInfoCompat;
 
+import com.farhanali.lite.Constant;
 import com.farhanali.lite.R;
-import com.farhanali.lite.constant.Constant;
-import com.farhanali.lite.utils.Utils;
-import com.farhanali.lite.view.Dialogs;
+import com.farhanali.lite.ui.Dialogs;
+import com.farhanali.lite.ui.Utils;
 
 import org.json.JSONObject;
 

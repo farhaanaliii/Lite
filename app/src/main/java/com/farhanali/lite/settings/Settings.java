@@ -1,9 +1,9 @@
-package com.farhanali.lite.utils;
+package com.farhanali.lite.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.farhanali.lite.constant.Constant;
+import com.farhanali.lite.Constant;
 
 public class Settings {
     private final SharedPreferences sharedPreferences;

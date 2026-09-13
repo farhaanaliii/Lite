@@ -1,4 +1,4 @@
-package com.farhanali.lite.service;
+package com.farhanali.lite.web;
 
 import android.webkit.WebViewClient;
 import android.webkit.WebView;

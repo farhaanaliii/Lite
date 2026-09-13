@@ -1,4 +1,4 @@
-package com.farhanali.lite.constant;
+package com.farhanali.lite;
 
 public class Constant {
 	public static final String VERSION_URL = "https://raw.githubusercontent.com/farhaanaliii/Lite/refs/heads/main/updates.json";

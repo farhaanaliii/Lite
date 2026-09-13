@@ -1,4 +1,4 @@
-package com.farhanali.lite.utils;
+package com.farhanali.lite.ui;
 
 import android.net.NetworkCapabilities;
 import android.webkit.WebStorage;

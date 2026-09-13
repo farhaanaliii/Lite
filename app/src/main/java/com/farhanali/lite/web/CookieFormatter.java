@@ -1,4 +1,4 @@
-package com.farhanali.lite.utils;
+package com.farhanali.lite.web;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

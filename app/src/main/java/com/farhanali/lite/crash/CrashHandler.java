@@ -1,4 +1,4 @@
-package com.farhanali.lite.utils;
+package com.farhanali.lite.crash;
 
 import android.app.Application;
 import android.content.Intent;
@@ -9,8 +9,6 @@ import android.os.Process;
 import android.util.Log;
 
 import androidx.core.content.pm.PackageInfoCompat;
-
-import com.farhanali.lite.activity.CrashActivity;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.text.SimpleDateFormat;

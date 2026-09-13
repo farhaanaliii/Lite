@@ -1,17 +1,18 @@
-package com.farhanali.lite.fragment;
+package com.farhanali.lite.settings;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
+
+import com.farhanali.lite.App;
+import com.farhanali.lite.Constant;
 import com.farhanali.lite.R;
-import com.farhanali.lite.app.App;
-import com.farhanali.lite.constant.Constant;
-import com.farhanali.lite.utils.Settings;
-import com.farhanali.lite.utils.Utils;
+import com.farhanali.lite.ui.Utils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

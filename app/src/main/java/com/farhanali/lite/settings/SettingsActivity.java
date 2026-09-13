@@ -1,11 +1,10 @@
-package com.farhanali.lite.activity;
+package com.farhanali.lite.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 import com.farhanali.lite.R;
-import com.farhanali.lite.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
     @Override

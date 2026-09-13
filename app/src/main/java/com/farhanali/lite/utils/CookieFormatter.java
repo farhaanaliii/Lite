@@ -2,297 +2,123 @@ package com.farhanali.lite.utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CookieFormatter {
-    
-    public static final int FORMAT_STRING = 0;
-    public static final int FORMAT_NETSCAPE = 1;
-    public static final int FORMAT_JSON_ARRAY = 2;
-    public static final int FORMAT_JSON_DICT = 3;
+public final class CookieFormatter {
+    private CookieFormatter() {}
 
-    /**
-     * Convert standard cookie string to String format (passthrough)
-     */
-    public static String toStringFormat(String cookies) {
-        if (cookies == null || cookies.trim().isEmpty()) {
-            return "";
+    public static String convertToFormat(String cookies, int format, String domain) {
+        if (cookies == null) return "";
+        try {
+            return switch (format) {
+                case 1 -> toNetscape(cookies, domain);
+                case 2 -> toJsonArray(cookies, domain);
+                case 3 -> toJsonDict(cookies);
+                default -> cookies.trim();
+            };
+        } catch (Exception e) {
+            return cookies;
         }
-        return cookies.trim();
     }
 
-    /**
-     * Convert standard cookie string to Netscape format
-     */
-    public static String toNetscapeFormat(String cookies, String domain) {
-        if (cookies == null || cookies.trim().isEmpty()) {
-            return "# Netscape HTTP Cookie File\n";
+    public static String parse(String input, int format) {
+        if (input == null || (input = input.trim()).isEmpty()) return "";
+        try {
+            return switch (format) {
+                case 1 -> fromNetscape(input);
+                case 2 -> fromJsonArray(input);
+                case 3 -> fromJsonDict(input);
+                default -> input;
+            };
+        } catch (Exception e) {
+            return "";
         }
+    }
 
-        StringBuilder netscape = new StringBuilder("# Netscape HTTP Cookie File\n");
-        String[] cookiePairs = cookies.split(";");
-        
-        long expires = System.currentTimeMillis() / 1000 + (365 * 24 * 60 * 60); // 1 year
-
-        for (String pair : cookiePairs) {
-            pair = pair.trim();
-            if (pair.isEmpty()) continue;
-            
+    private static Map<String, String> parsePairs(String cookies) {
+        Map<String, String> map = new LinkedHashMap<>();
+        for (String pair : cookies.split(";")) {
             String[] parts = pair.split("=", 2);
             if (parts.length == 2) {
-                String name = parts[0].trim();
-                String value = parts[1].trim();
-                
-                netscape.append(domain)
-                        .append("\tTRUE\t/\tFALSE\t")
-                        .append(expires)
-                        .append("\t")
-                        .append(name)
-                        .append("\t")
-                        .append(value)
-                        .append("\n");
+                String key = parts[0].trim();
+                if (!key.isEmpty()) map.put(key, parts[1].trim());
             }
         }
-        
-        return netscape.toString();
+        return map;
     }
 
-    /**
-     * Convert standard cookie string to JSON Array format with full details
-     */
-    public static String toJsonArrayFormat(String cookies, String domain) {
-        if (cookies == null || cookies.trim().isEmpty()) {
-            return "[]";
-        }
-
-        try {
-            JSONArray jsonArray = new JSONArray();
-            String[] cookiePairs = cookies.split(";");
-            
-            long expires = System.currentTimeMillis() / 1000 + (365 * 24 * 60 * 60); // 1 year
-
-            for (String pair : cookiePairs) {
-                pair = pair.trim();
-                if (pair.isEmpty()) continue;
-                
-                String[] parts = pair.split("=", 2);
-                if (parts.length == 2) {
-                    JSONObject cookieObj = new JSONObject();
-                    cookieObj.put("name", parts[0].trim());
-                    cookieObj.put("value", parts[1].trim());
-                    cookieObj.put("domain", domain);
-                    cookieObj.put("path", "/");
-                    cookieObj.put("expires", expires);
-                    cookieObj.put("httpOnly", false);
-                    cookieObj.put("secure", true);
-                    cookieObj.put("sameSite", "None");
-                    
-                    jsonArray.put(cookieObj);
-                }
-            }
-            
-            return jsonArray.toString(4);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "[]";
+    private static void appendCookie(StringBuilder sb, String name, String value) {
+        if (name != null && !name.isEmpty()) {
+            if (sb.length() > 0) sb.append("; ");
+            sb.append(name).append('=').append(value != null ? value : "");
         }
     }
 
-    /**
-     * Convert standard cookie string to JSON Dictionary format
-     */
-    public static String toJsonDictFormat(String cookies) {
-        if (cookies == null || cookies.trim().isEmpty()) {
-            return "{}";
+    private static String toNetscape(String cookies, String domain) {
+        StringBuilder sb = new StringBuilder("# Netscape HTTP Cookie File\n");
+        long expires = System.currentTimeMillis() / 1000 + (365L * 24 * 60 * 60);
+        for (Map.Entry<String, String> entry : parsePairs(cookies).entrySet()) {
+            sb.append(domain).append("\tTRUE\t/\tFALSE\t").append(expires)
+              .append("\t").append(entry.getKey()).append("\t").append(entry.getValue()).append("\n");
         }
-
-        try {
-            JSONObject jsonDict = new JSONObject();
-            String[] cookiePairs = cookies.split(";");
-
-            for (String pair : cookiePairs) {
-                pair = pair.trim();
-                if (pair.isEmpty()) continue;
-                
-                String[] parts = pair.split("=", 2);
-                if (parts.length == 2) {
-                    jsonDict.put(parts[0].trim(), parts[1].trim());
-                }
-            }
-            
-            return jsonDict.toString(4);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "{}";
-        }
+        return sb.toString();
     }
 
-    /**
-     * Parse standard string format to cookie string (passthrough)
-     */
-    public static String fromStringFormat(String str) {
-        if (str == null || str.trim().isEmpty()) {
-            return "";
+    private static String toJsonArray(String cookies, String domain) throws Exception {
+        JSONArray array = new JSONArray();
+        long expires = System.currentTimeMillis() / 1000 + (365L * 24 * 60 * 60);
+        for (Map.Entry<String, String> entry : parsePairs(cookies).entrySet()) {
+            JSONObject obj = new JSONObject();
+            obj.put("name", entry.getKey());
+            obj.put("value", entry.getValue());
+            obj.put("domain", domain);
+            obj.put("path", "/");
+            obj.put("expires", expires);
+            array.put(obj);
         }
-        return str.trim();
+        return array.toString(4);
     }
 
-    /**
-     * Parse Netscape format to standard cookie string
-     */
-    public static String fromNetscapeFormat(String netscape) {
-        if (netscape == null || netscape.trim().isEmpty()) {
-            return "";
+    private static String toJsonDict(String cookies) throws Exception {
+        JSONObject dict = new JSONObject();
+        for (Map.Entry<String, String> entry : parsePairs(cookies).entrySet()) {
+            dict.put(entry.getKey(), entry.getValue());
         }
+        return dict.toString(4);
+    }
 
-        StringBuilder cookies = new StringBuilder();
-        String[] lines = netscape.split("\n");
-
-        for (String line : lines) {
+    private static String fromNetscape(String netscape) {
+        StringBuilder sb = new StringBuilder();
+        for (String line : netscape.split("\n")) {
             line = line.trim();
-            if (line.isEmpty() || line.startsWith("#")) {
-                continue;
-            }
-
+            if (line.isEmpty() || line.startsWith("#")) continue;
             String[] parts = line.split("\\s+");
-            if (parts.length >= 7) {
-                String name = parts[5];
-                String value = parts[6];
-                
-                if (cookies.length() > 0) {
-                    cookies.append("; ");
-                }
-                cookies.append(name).append("=").append(value);
+            if (parts.length >= 7) appendCookie(sb, parts[5], parts[6]);
+        }
+        return sb.toString();
+    }
+
+    private static String fromJsonArray(String json) throws Exception {
+        JSONArray array = new JSONArray(json);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj = array.getJSONObject(i);
+            appendCookie(sb, obj.optString("name", ""), obj.optString("value", ""));
+        }
+        return sb.toString();
+    }
+
+    private static String fromJsonDict(String json) throws Exception {
+        JSONObject dict = new JSONObject(json);
+        StringBuilder sb = new StringBuilder();
+        JSONArray names = dict.names();
+        if (names != null) {
+            for (int i = 0; i < names.length(); i++) {
+                String name = names.getString(i);
+                appendCookie(sb, name, dict.optString(name, ""));
             }
         }
-
-        return cookies.toString();
-    }
-
-    /**
-     * Parse JSON Array format to standard cookie string
-     */
-    public static String fromJsonArrayFormat(String json) {
-        if (json == null || json.trim().isEmpty()) {
-            return "";
-        }
-
-        try {
-            JSONArray jsonArray = new JSONArray(json);
-            StringBuilder cookies = new StringBuilder();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject cookie = jsonArray.getJSONObject(i);
-                String name = cookie.optString("name", "");
-                String value = cookie.optString("value", "");
-
-                if (!name.isEmpty()) {
-                    if (cookies.length() > 0) {
-                        cookies.append("; ");
-                    }
-                    cookies.append(name).append("=").append(value);
-                }
-            }
-
-            return cookies.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    /**
-     * Parse JSON Dictionary format to standard cookie string
-     */
-    public static String fromJsonDictFormat(String json) {
-        if (json == null || json.trim().isEmpty()) {
-            return "";
-        }
-
-        try {
-            JSONObject jsonDict = new JSONObject(json);
-            StringBuilder cookies = new StringBuilder();
-            
-            JSONArray names = jsonDict.names();
-            if (names != null) {
-                for (int i = 0; i < names.length(); i++) {
-                    String name = names.getString(i);
-                    String value = jsonDict.getString(name);
-
-                    if (cookies.length() > 0) {
-                        cookies.append("; ");
-                    }
-                    cookies.append(name).append("=").append(value);
-                }
-            }
-
-            return cookies.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    /**
-     * Auto-detect cookie format
-     * @return FORMAT_STRING, FORMAT_NETSCAPE, FORMAT_JSON_ARRAY, or FORMAT_JSON_DICT
-     */
-    public static int detectFormat(String input) {
-        if (input == null || input.trim().isEmpty()) {
-            return FORMAT_STRING;
-        }
-
-        String trimmed = input.trim();
-
-        if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-            return FORMAT_JSON_ARRAY;
-        }
-
-        if (trimmed.startsWith("{") && trimmed.endsWith("}")) {
-            return FORMAT_JSON_DICT;
-        }
-
-        if (trimmed.contains("# Netscape") || trimmed.contains("\t")) {
-            return FORMAT_NETSCAPE;
-        }
-
-        return FORMAT_STRING;
-    }
-
-    /**
-     * Parse any format to standard cookie string
-     */
-    public static String parseToString(String input) {
-        int format = detectFormat(input);
-        
-        switch (format) {
-            case FORMAT_NETSCAPE:
-                return fromNetscapeFormat(input);
-            case FORMAT_JSON_ARRAY:
-                return fromJsonArrayFormat(input);
-            case FORMAT_JSON_DICT:
-                return fromJsonDictFormat(input);
-            case FORMAT_STRING:
-            default:
-                return fromStringFormat(input);
-        }
-    }
-
-    /**
-     * Convert from standard string to specified format
-     */
-    public static String convertToFormat(String cookies, int format, String domain) {
-        switch (format) {
-            case FORMAT_NETSCAPE:
-                return toNetscapeFormat(cookies, domain);
-            case FORMAT_JSON_ARRAY:
-                return toJsonArrayFormat(cookies, domain);
-            case FORMAT_JSON_DICT:
-                return toJsonDictFormat(cookies);
-            case FORMAT_STRING:
-            default:
-                return toStringFormat(cookies);
-        }
+        return sb.toString();
     }
 }

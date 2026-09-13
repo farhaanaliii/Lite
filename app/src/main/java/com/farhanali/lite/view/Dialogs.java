@@ -39,7 +39,7 @@ public class Dialogs {
             R.array.cookie_formats,
             android.R.layout.simple_spinner_item
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
         formatSpinner.setAdapter(adapter);
 
         final String baseCookies = Utils.getCookies("https://www.facebook.com");
@@ -83,7 +83,7 @@ public class Dialogs {
             R.array.cookie_formats,
             android.R.layout.simple_spinner_item
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
         formatSpinner.setAdapter(adapter);
 
         final String currentCookies = Utils.getCookies(Constant.FACEBOOK_HOME);
@@ -118,20 +118,7 @@ public class Dialogs {
                 }
                 
                 try {
-                    String standardCookies;
-                    int selectedFormat = formatSpinner.getSelectedItemPosition();
-                    
-                    if (selectedFormat == CookieFormatter.FORMAT_STRING) {
-                        standardCookies = CookieFormatter.fromStringFormat(inputText);
-                    } else if (selectedFormat == CookieFormatter.FORMAT_NETSCAPE) {
-                        standardCookies = CookieFormatter.fromNetscapeFormat(inputText);
-                    } else if (selectedFormat == CookieFormatter.FORMAT_JSON_ARRAY) {
-                        standardCookies = CookieFormatter.fromJsonArrayFormat(inputText);
-                    } else if (selectedFormat == CookieFormatter.FORMAT_JSON_DICT) {
-                        standardCookies = CookieFormatter.fromJsonDictFormat(inputText);
-                    } else {
-                        standardCookies = CookieFormatter.parseToString(inputText);
-                    }
+                    String standardCookies = CookieFormatter.parse(inputText, formatSpinner.getSelectedItemPosition());
                     
                     if (standardCookies.isEmpty()) {
                         Utils.Toast(context, context.getString(R.string.invalid_cookie_format));
@@ -164,7 +151,10 @@ public class Dialogs {
     public static void showCurrentUrlDialog(final Context context, final String url) {
         MaterialAlertDialogBuilder urlDialog = new MaterialAlertDialogBuilder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_edittext, null);
+        view.findViewById(R.id.spinner_container).setVisibility(View.GONE);
         final TextInputEditText editText = view.findViewById(R.id.edit_text);
+        editText.setMinHeight(0);
+        editText.setMinimumHeight(0);
         final TextInputLayout textInputLayout = view.findViewById(R.id.text_input_layout);
         textInputLayout.setHint(context.getString(R.string.current_url));
 

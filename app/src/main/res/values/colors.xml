@@ -32,6 +32,11 @@
     <color name="md_theme_light_surfaceVariant">#E0E2EC</color>
     <color name="md_theme_light_onSurfaceVariant">#44474E</color>
 
+    <!-- Surface Container colors for elevated surfaces -->
+    <color name="md_theme_light_surfaceContainer">#F0F1F6</color>
+    <color name="md_theme_light_surfaceContainerHigh">#EAEBF1</color>
+    <color name="md_theme_light_surfaceContainerHighest">#E2E2E9</color>
+
     <!-- Outline & Misc -->
     <color name="md_theme_light_outline">#74777F</color>
     <color name="md_theme_light_outlineVariant">#C4C6D0</color>

@@ -43,7 +43,7 @@ public class Dialogs {
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
         formatSpinner.setAdapter(adapter);
 
-        final String baseCookies = Utils.getCookies("https://www.facebook.com");
+        final String baseCookies = Utils.getCookies(Constant.FACEBOOK_HOME);
         final String[] currentFormat = {baseCookies};
         
         editText.setText(baseCookies);
@@ -135,6 +135,7 @@ public class Dialogs {
                             cookieManager.setCookie(Constant.FACEBOOK_HOME, cookie + ";");
                         }
                     }
+                    cookieManager.flush();
                     
                     Utils.Toast(context, context.getString(R.string.cookies_saved));
                     webView.loadUrl(Constant.FACEBOOK_HOME);

@@ -85,5 +85,6 @@
     <string name="javascript_updated">JavaScript setting updated!</string>
 
     <!-- Crash -->
+    <string name="crash_title">Lite++ Crashed</string>
     <string name="no_crash_info">No crash information available.</string>
 </resources>

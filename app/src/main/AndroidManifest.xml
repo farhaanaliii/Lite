@@ -26,11 +26,11 @@
         </activity>
 		<activity
 			android:name=".activity.AboutActivity"
-			android:label="About"/>
+			android:label="@string/menu_about"/>
 		<activity android:name=".activity.SettingsActivity"
 			android:label="@string/settings"/>
         <activity
             android:name=".activity.CrashActivity"
-            android:label="Lite++ Crashed"/>
+            android:label="@string/crash_title"/>
     </application>
 </manifest>

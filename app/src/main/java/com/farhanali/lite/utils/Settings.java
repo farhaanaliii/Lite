@@ -7,11 +7,9 @@ import com.farhanali.lite.constant.Constant;
 
 public class Settings {
     private final SharedPreferences sharedPreferences;
-    private final SharedPreferences.Editor editor;
 
     public Settings(Context context) {
         sharedPreferences = context.getSharedPreferences(Constant.SHARED_PREFS, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
     }
 
     public boolean isDesktopModeEnabled() {
@@ -19,11 +17,11 @@ public class Settings {
     }
 
     public void setDesktopModeEnabled(boolean isEnabled) {
-        editor.putBoolean(Constant.PREF_KEY_IS_DESKTOP, isEnabled).apply();
+        sharedPreferences.edit().putBoolean(Constant.PREF_KEY_IS_DESKTOP, isEnabled).apply();
     }
 
     public void saveUserAgent(String userAgent) {
-        editor.putString(Constant.PREF_KEY_USER_AGENT, userAgent).apply();
+        sharedPreferences.edit().putString(Constant.PREF_KEY_USER_AGENT, userAgent).apply();
     }
 
     public String getUserAgent() {
@@ -31,7 +29,7 @@ public class Settings {
     }
 
     public void saveCustomUserAgent(String userAgent) {
-        editor.putString(Constant.PREF_KEY_CUSTOM_USER_AGENT, userAgent).apply();
+        sharedPreferences.edit().putString(Constant.PREF_KEY_CUSTOM_USER_AGENT, userAgent).apply();
     }
 
     public String getCustomUserAgent() {
@@ -43,7 +41,7 @@ public class Settings {
     }
 
     public void setJavaScriptEnabled(boolean isEnabled) {
-        editor.putBoolean(Constant.PREF_KEY_JAVASCRIPT, isEnabled).apply();
+        sharedPreferences.edit().putBoolean(Constant.PREF_KEY_JAVASCRIPT, isEnabled).apply();
     }
 
     public String getTheme() {
@@ -51,14 +49,10 @@ public class Settings {
     }
 
     public void setTheme(String theme) {
-        editor.putString(Constant.PREF_KEY_THEME, theme).apply();
-    }
-
-    public void clearCache() {
-        editor.remove(Constant.PREF_KEY_CACHE).apply();
+        sharedPreferences.edit().putString(Constant.PREF_KEY_THEME, theme).apply();
     }
 
     public void resetToDefaults() {
-        editor.clear().apply();
+        sharedPreferences.edit().clear().apply();
     }
 }

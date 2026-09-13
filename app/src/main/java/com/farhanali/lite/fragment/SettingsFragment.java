@@ -9,7 +9,6 @@ import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import com.farhanali.lite.R;
 import com.farhanali.lite.app.App;
-import com.farhanali.lite.activity.MainActivity;
 import com.farhanali.lite.constant.Constant;
 import com.farhanali.lite.utils.Settings;
 import com.farhanali.lite.utils.Utils;
@@ -57,9 +56,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (resetSettingsPref != null) {
             resetSettingsPref.setOnPreferenceClickListener(preference -> {
                 settings.saveCustomUserAgent("");
-                //MainActivity.getWebView().getSettings().setUserAgentString(settings.getUserAgent());
                 settings.setJavaScriptEnabled(true);
-                //MainActivity.getWebView().getSettings().setJavaScriptEnabled(true);
                 Utils.Toast(getContext(), getString(R.string.settings_reset));
                 return true;
             });
@@ -72,7 +69,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             userAgentPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 String newUserAgent = (String) newValue;
                 settings.saveCustomUserAgent(newUserAgent);
-                //MainActivity.getWebView().getSettings().setUserAgentString(newUserAgent);
                 Utils.Toast(getContext(), getString(R.string.user_agent_updated));
                 return true;
             });
@@ -84,7 +80,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             jsEnabledPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean isEnabled = (Boolean) newValue;
                 settings.setJavaScriptEnabled(isEnabled);
-                //MainActivity.getWebView().getSettings().setJavaScriptEnabled(isEnabled);
                 Utils.Toast(getContext(), getString(R.string.javascript_updated));
                 return true;
             });

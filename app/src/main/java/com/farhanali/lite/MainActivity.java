@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity{
                 if (fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE) {
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 }
-                fileChooserLauncher.launch(Intent.createChooser(intent, "Select File"));
+                fileChooserLauncher.launch(Intent.createChooser(intent, getString(R.string.select_file)));
                 return true;
             }
         });

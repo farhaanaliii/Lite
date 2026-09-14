@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:title="General Settings">
+        android:title="@string/pref_category_general">
 
         <ListPreference
             android:key="pref_theme"
-            android:title="App Theme"
-            android:summary="Choose between System, Light, or Dark"
+            android:title="@string/pref_theme"
+            android:summary="@string/pref_theme_summary"
             android:entries="@array/theme_entries"
             android:entryValues="@array/theme_values"
             android:defaultValue="system"
@@ -16,44 +16,44 @@
 
         <EditTextPreference
             android:key="pref_custom_user_agent"
-            android:title="Custom User-Agent"
-            android:summary="Set a custom User-Agent string for requests"
-            android:dialogTitle="Enter User-Agent"
+            android:title="@string/pref_custom_user_agent"
+            android:summary="@string/pref_custom_user_agent_summary"
+            android:dialogTitle="@string/pref_dialog_title_user_agent"
             android:defaultValue=""
             android:inputType="text"
             app:icon="@drawable/ic_user_agent" />
 
         <SwitchPreferenceCompat
             android:key="pref_javascript"
-            android:title="Enable JavaScript"
-            android:summary="Allow JavaScript execution in web content"
+            android:title="@string/pref_javascript"
+            android:summary="@string/pref_javascript_summary"
             android:defaultValue="true"
             app:icon="@drawable/baseline_javascript_24" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Storage &amp; Performance">
+        android:title="@string/pref_category_storage">
 
         <Preference
             android:key="pref_cache"
-            android:title="Clear Cache"
-            android:summary="Delete cached data to free up space"
+            android:title="@string/pref_clear_cache"
+            android:summary="@string/pref_clear_cache_summary"
             app:icon="@drawable/baseline_cached_24" />
 
         <Preference
             android:key="pref_data"
-            android:title="Clear Storage"
-            android:summary="Reset all app data and settings"
+            android:title="@string/pref_clear_storage"
+            android:summary="@string/pref_clear_storage_summary"
             app:icon="@drawable/ic_storage" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Advanced Settings">
+        android:title="@string/pref_category_advanced">
 
         <Preference
             android:key="pref_reset"
-            android:title="Reset to Default"
-            android:summary="Restore all settings to default values"
+            android:title="@string/pref_reset"
+            android:summary="@string/pref_reset_summary"
             app:icon="@drawable/ic_reset" />
     </PreferenceCategory>
 

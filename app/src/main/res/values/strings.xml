@@ -17,18 +17,44 @@
     <string name="no_internet">No Internet connection!</string>
 
     <string name="preference_title_developer">Developer</string>
+    <string name="preference_summary_developer">Creator and Developer of Lite++</string>
     <string name="preference_title_about_app">About App</string>
     <string name="preference_title_contact">Contact</string>
     <string name="preference_title_version">Version</string>
     <string name="preference_title_app_status">App Status</string>
     <string name="preference_title_bugs_features">Bugs and Features</string>
     <string name="preference_title_facebook">Facebook</string>
+    <string name="preference_summary_facebook">Contact me on Facebook</string>
     <string name="preference_title_github">GitHub</string>
+    <string name="preference_summary_github">Star on GitHub</string>
     <string name="preference_title_youtube">YouTube</string>
+    <string name="preference_summary_youtube">Subscribe to my channel</string>
+    <string name="preference_title_email">Email</string>
     <string name="app_status">This app is currently under development</string>
     <string name="bugs_and_features">Report bugs or suggest features</string>
     <string name="check_for_updates">Check for updates</string>
     <string name="settings">Settings</string>
+    <string name="select_file">Select File</string>
+
+    <!-- Settings Preferences -->
+    <string name="pref_category_general">General Settings</string>
+    <string name="pref_theme">App Theme</string>
+    <string name="pref_theme_summary">Choose between System, Light, or Dark</string>
+    <string name="pref_custom_user_agent">Custom User-Agent</string>
+    <string name="pref_custom_user_agent_summary">Set a custom User-Agent string for requests</string>
+    <string name="pref_dialog_title_user_agent">Enter User-Agent</string>
+    <string name="pref_javascript">Enable JavaScript</string>
+    <string name="pref_javascript_summary">Allow JavaScript execution in web content</string>
+
+    <string name="pref_category_storage">Storage &amp; Performance</string>
+    <string name="pref_clear_cache">Clear Cache</string>
+    <string name="pref_clear_cache_summary">Delete cached data to free up space</string>
+    <string name="pref_clear_storage">Clear Storage</string>
+    <string name="pref_clear_storage_summary">Reset all app data and settings</string>
+
+    <string name="pref_category_advanced">Advanced Settings</string>
+    <string name="pref_reset">Reset to Default</string>
+    <string name="pref_reset_summary">Restore all settings to default values</string>
 
     <string-array name="cookie_formats">
         <item>String</item>

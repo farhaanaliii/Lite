@@ -8,7 +8,7 @@
         <PreferenceScreen
             android:title="@string/dev_name"
             android:key="Key_dev_name"
-            android:summary="Creator and Developer of Lite++"
+            android:summary="@string/preference_summary_developer"
             app:icon="@drawable/baseline_logo_dev_24" />
     </PreferenceCategory>
 
@@ -40,7 +40,7 @@
         <PreferenceScreen
             android:title="@string/preference_title_facebook"
             android:key="Key_facebook"
-            android:summary="Contact me on Facebook"
+            android:summary="@string/preference_summary_facebook"
             app:icon="@drawable/ic_facebook">
             <intent
                 android:action="android.intent.action.VIEW"
@@ -50,7 +50,7 @@
         <PreferenceScreen
             android:title="@string/preference_title_github"
             android:key="Key_github"
-            android:summary="Star on GitHub"
+            android:summary="@string/preference_summary_github"
             app:icon="@drawable/ic_github">
             <intent
                 android:action="android.intent.action.VIEW"
@@ -60,7 +60,7 @@
         <PreferenceScreen
             android:title="@string/preference_title_youtube"
             android:key="Key_yt"
-            android:summary="Subscribe to my channel"
+            android:summary="@string/preference_summary_youtube"
             app:icon="@drawable/ic_youtube">
             <intent
                 android:action="android.intent.action.VIEW"
@@ -68,7 +68,7 @@
         </PreferenceScreen>
 
         <PreferenceScreen
-            android:title="Email"
+            android:title="@string/preference_title_email"
             android:key="Key_email"
             android:summary="@string/dev_email"
             app:icon="@drawable/baseline_email_24" />

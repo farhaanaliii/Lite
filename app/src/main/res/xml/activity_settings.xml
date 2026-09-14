@@ -12,7 +12,7 @@
             android:entries="@array/theme_entries"
             android:entryValues="@array/theme_values"
             android:defaultValue="system"
-            app:icon="@drawable/baseline_color_lens_24" />
+            app:icon="@drawable/ic_theme" />
 
         <EditTextPreference
             android:key="pref_custom_user_agent"
@@ -28,7 +28,7 @@
             android:title="@string/pref_javascript"
             android:summary="@string/pref_javascript_summary"
             android:defaultValue="true"
-            app:icon="@drawable/baseline_javascript_24" />
+            app:icon="@drawable/ic_javascript" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -38,7 +38,7 @@
             android:key="pref_cache"
             android:title="@string/pref_clear_cache"
             android:summary="@string/pref_clear_cache_summary"
-            app:icon="@drawable/baseline_cached_24" />
+            app:icon="@drawable/ic_cache" />
 
         <Preference
             android:key="pref_data"

@@ -26,8 +26,7 @@
 		android:title="@string/desktop_mode"
 		android:checkable="true"
 		android:enabled="true"
-		app:actionLayout="@layout/desktop_menu"
-		android:icon="@drawable/ic_desktop"/>
+		app:actionLayout="@layout/desktop_menu" />
 
 	<item
 		android:id="@+id/about"

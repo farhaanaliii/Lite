@@ -18,7 +18,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.farhanali.lite.settings.AboutActivity;
 import com.farhanali.lite.settings.Settings;
 import com.farhanali.lite.settings.SettingsActivity;
 import com.farhanali.lite.ui.Dialogs;
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity{
             desktopMode(item);
         }
         else if(id == R.id.about) {
-            startActivity(new Intent(context, AboutActivity.class));
+            Dialogs.showAboutDialog(context);
         }
         else if(id == R.id.editCookies){
             Dialogs.showEditCookiesDialog(context, webView, cookieManager);

@@ -24,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-		<activity
-			android:name=".settings.AboutActivity"
-			android:label="@string/menu_about"/>
 		<activity android:name=".settings.SettingsActivity"
 			android:label="@string/settings"/>
         <activity

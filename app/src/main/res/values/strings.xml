@@ -6,35 +6,13 @@
     <string name="extract_cookies">Extract Cookies</string>
     <string name="edit_cookies">Edit Cookies</string>
     <string name="desktop_mode">Desktop Mode</string>
-    <string name="dev_name">Farhan Ali</string>
-    <string name="dev_email">i.farhanali.dev@gmail.com</string>
-    <string name="dev_yt">https://youtube.com/@TheAnonymous_ofc</string>
-    <string name="dev_github">https://www.github.com/farhaanaliii/Lite/</string>
-    <string name="dev_fb">https://www.facebook.com/i.farhanali.dev</string>
-    <string name="current_version">1.1.0</string>
     <string name="menu_about">About</string>
     <string name="menu_current_url">See Current URL</string>
     <string name="no_internet">No Internet connection!</string>
-
-    <string name="preference_title_developer">Developer</string>
-    <string name="preference_summary_developer">Creator and Developer of Lite++</string>
-    <string name="preference_title_about_app">About App</string>
-    <string name="preference_title_contact">Contact</string>
-    <string name="preference_title_version">Version</string>
-    <string name="preference_title_app_status">App Status</string>
-    <string name="preference_title_bugs_features">Bugs and Features</string>
-    <string name="preference_title_facebook">Facebook</string>
-    <string name="preference_summary_facebook">Contact me on Facebook</string>
-    <string name="preference_title_github">GitHub</string>
-    <string name="preference_summary_github">Star on GitHub</string>
-    <string name="preference_title_youtube">YouTube</string>
-    <string name="preference_summary_youtube">Subscribe to my channel</string>
-    <string name="preference_title_email">Email</string>
-    <string name="app_status">This app is currently under development</string>
-    <string name="bugs_and_features">Report bugs or suggest features</string>
     <string name="check_for_updates">Check for updates</string>
     <string name="settings">Settings</string>
     <string name="select_file">Select File</string>
+    <string name="close">Close</string>
 
     <!-- Settings Preferences -->
     <string name="pref_category_general">General Settings</string>
@@ -113,4 +91,11 @@
     <!-- Crash -->
     <string name="crash_title">Lite++ Crashed</string>
     <string name="no_crash_info">No crash information available.</string>
+
+    <!-- About Dialog -->
+    <string name="about_description">A lightweight browser wrapper built exclusively for Facebook.</string>
+    <string name="about_developer">Developer: %s</string>
+    <string name="about_license">License: %s</string>
+    <string name="about_github">GitHub</string>
+    <string name="about_license_btn">License</string>
 </resources>

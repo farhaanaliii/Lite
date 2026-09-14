@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.farhanali.lite.BuildConfig;
 import com.farhanali.lite.Constant;
 import com.farhanali.lite.R;
 import com.farhanali.lite.web.CookieFormatter;
@@ -222,6 +223,27 @@ public class Dialogs {
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
         }
+    }
+
+    public static void showAboutDialog(Context context) {
+        String title = context.getString(R.string.app_name) + " v" + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")";
+
+        String message = context.getString(R.string.about_description) + "\n\n"
+                + context.getString(R.string.about_developer, "Farhan Ali") + "\n"
+                + context.getString(R.string.about_license, "MIT");
+
+        new MaterialAlertDialogBuilder(context)
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(R.string.about_github, (dialog, which) -> {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.GITHUB_REPO)));
+                })
+                .setNeutralButton(R.string.about_license_btn, (dialog, which) -> {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constant.GITHUB_REPO + "/blob/main/LICENSE")));
+                })
+                .setNegativeButton(R.string.close, null)
+                .show();
     }
 
     private static String getChangeIcon(String type) {

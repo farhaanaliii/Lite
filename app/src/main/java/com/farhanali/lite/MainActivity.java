@@ -268,10 +268,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public WebView getWebView(){
-        return webView;
-    }
-
     private void fixOverflowIconColor(MaterialToolbar toolbar) {
         try {
             android.graphics.drawable.Drawable overflowIcon = toolbar.getOverflowIcon();

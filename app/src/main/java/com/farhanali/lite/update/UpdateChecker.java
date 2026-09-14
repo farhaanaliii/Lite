@@ -28,16 +28,6 @@ public class UpdateChecker {
     private static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
-    private final Context context;
-
-    public UpdateChecker(Context context) {
-        this.context = context;
-    }
-
-    public void execute() {
-        check(context);
-    }
-
     public static void check(Context context) {
         Utils.Toast(context, context.getString(R.string.checking_updates));
         EXECUTOR.execute(() -> {

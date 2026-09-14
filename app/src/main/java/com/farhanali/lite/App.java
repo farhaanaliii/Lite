@@ -1,7 +1,6 @@
 package com.farhanali.lite;
 
 import android.app.Application;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.farhanali.lite.crash.CrashHandler;
 import com.farhanali.lite.settings.Settings;

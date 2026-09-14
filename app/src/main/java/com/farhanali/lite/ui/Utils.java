@@ -2,7 +2,6 @@ package com.farhanali.lite.ui;
 
 import android.net.NetworkCapabilities;
 import android.webkit.WebStorage;
-import android.webkit.WebView;
 import android.widget.Toast;
 import android.content.Context;
 import android.net.ConnectivityManager;

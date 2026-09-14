@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.content.Intent;
 
-import com.farhanali.lite.R;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {

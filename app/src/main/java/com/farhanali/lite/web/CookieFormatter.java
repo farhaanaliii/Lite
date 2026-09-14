@@ -36,8 +36,13 @@ public final class CookieFormatter {
         }
     }
 
+    public static String getCookie(String cookies, String name) {
+        return parsePairs(cookies).get(name);
+    }
+
     private static Map<String, String> parsePairs(String cookies) {
         Map<String, String> map = new LinkedHashMap<>();
+        if (cookies == null || cookies.isEmpty()) return map;
         for (String pair : cookies.split(";")) {
             String[] parts = pair.split("=", 2);
             if (parts.length == 2) {

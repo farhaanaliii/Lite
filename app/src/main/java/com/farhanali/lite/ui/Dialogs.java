@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.farhanali.lite.BuildConfig;
 import com.farhanali.lite.Constant;
@@ -27,14 +28,10 @@ public class Dialogs {
 
     public static void showCookieDialog(final Context context) {
         MaterialAlertDialogBuilder cookieDialog = new MaterialAlertDialogBuilder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_edittext, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_cookies, null);
         
-        final TextInputEditText editText = view.findViewById(R.id.edit_text);
-        final TextInputLayout textInputLayout = view.findViewById(R.id.text_input_layout);
+        final TextView codeText = view.findViewById(R.id.code_text);
         final Spinner formatSpinner = view.findViewById(R.id.format_spinner);
-        
-        textInputLayout.setHint(context.getString(R.string.cookies));
-        editText.setFocusable(false);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
             context,
@@ -47,23 +44,33 @@ public class Dialogs {
         final String baseCookies = Utils.getCookies(Constant.FACEBOOK_HOME);
         final String[] currentFormat = {baseCookies};
         
-        editText.setText(baseCookies);
+        codeText.setText(baseCookies);
 
         formatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String formatted = CookieFormatter.convertToFormat(baseCookies, position, ".facebook.com");
                 currentFormat[0] = formatted;
-                editText.setText(formatted);
+                codeText.setText(formatted);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        String userId = CookieFormatter.getCookie(baseCookies, "c_user");
+        if (userId != null) {
+            view.findViewById(R.id.account_card).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.account_user_id)).setText("ID: " + userId);
+            view.findViewById(R.id.account_copy_btn).setOnClickListener(v -> {
+                Utils.copy(Constant.FACEBOOK_HOME + "/" + userId, context);
+                Utils.toast(context, R.string.copied);
+            });
+        }
+
         cookieDialog.setTitle(context.getString(R.string.cookies));
         cookieDialog.setView(view);
-        cookieDialog.setPositiveButton(context.getString(R.string.copy_to_clipboard), (dialog, whichButton) -> {
+        cookieDialog.setPositiveButton(context.getString(R.string.copy_to_clipboard), (dialog, which) -> {
             Utils.copy(currentFormat[0], context);
             Utils.toast(context, R.string.copied);
         });
@@ -110,7 +117,7 @@ public class Dialogs {
 
         cookieDialog.setTitle(context.getString(R.string.edit_cookies));
         cookieDialog.setView(view);
-        cookieDialog.setPositiveButton(context.getString(R.string.save_cookies), (dialog, whichButton) -> {
+        cookieDialog.setPositiveButton(context.getString(R.string.save_cookies), (dialog, which) -> {
             if (editText.getText() != null) {
                 String inputText = editText.getText().toString().trim();
                 
@@ -166,7 +173,7 @@ public class Dialogs {
 
         urlDialog.setTitle(context.getString(R.string.current_url));
         urlDialog.setView(view);
-        urlDialog.setPositiveButton(android.R.string.copy, (dialog, whichButton) -> {
+        urlDialog.setPositiveButton(android.R.string.copy, (dialog, which) -> {
             Utils.copy(url, context);
             Utils.toast(context, R.string.copied);
         });

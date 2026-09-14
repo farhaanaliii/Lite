@@ -29,7 +29,7 @@ public class UpdateChecker {
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 
     public static void check(Context context) {
-        Utils.Toast(context, context.getString(R.string.checking_updates));
+        Utils.toast(context, context.getString(R.string.checking_updates));
         EXECUTOR.execute(() -> {
             String jsonStr = fetchJson();
             MAIN_HANDLER.post(() -> onResult(context, jsonStr));
@@ -38,7 +38,7 @@ public class UpdateChecker {
 
     private static void onResult(Context context, String jsonStr) {
         if (jsonStr == null) {
-            Utils.Toast(context, context.getString(R.string.no_internet));
+            Utils.toast(context, context.getString(R.string.no_internet));
             return;
         }
         try {
@@ -48,10 +48,10 @@ public class UpdateChecker {
             if (isUpdateAvailable(currentCode, json)) {
                 Dialogs.showUpdateDialog(context, jsonStr);
             } else {
-                Utils.Toast(context, context.getString(R.string.latest_version));
+                Utils.toast(context, context.getString(R.string.latest_version));
             }
         } catch (Exception e) {
-            Utils.Toast(context, context.getString(R.string.update_check_failed));
+            Utils.toast(context, context.getString(R.string.update_check_failed));
         }
     }
 

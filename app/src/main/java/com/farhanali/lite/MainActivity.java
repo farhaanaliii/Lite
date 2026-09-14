@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity{
             if(Utils.isInternetOn(context)){
                 UpdateChecker.check(context);
             }else{
-                Utils.Toast(context, getString(R.string.no_internet));
+                Utils.toast(context, getString(R.string.no_internet));
             }
         } else if(id == R.id.settings){
             settingsLauncher.launch(new Intent(context, SettingsActivity.class));
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity{
             if(Utils.isInternetOn(context)){
                 UpdateChecker.check(context);
             }else{
-                Utils.Toast(context, getString(R.string.no_internet));
+                Utils.toast(context, getString(R.string.no_internet));
             }
         }
     }

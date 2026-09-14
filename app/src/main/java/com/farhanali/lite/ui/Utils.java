@@ -11,7 +11,7 @@ import android.content.ClipboardManager;
 
 public class Utils {
 
-    public static void Toast(Context context, String text) {
+    public static void toast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
@@ -30,7 +30,7 @@ public class Utils {
         return CookieManager.getInstance().getCookie(url);
     }
 
-    public static void Copy(String text, Context context) {
+    public static void copy(String text, Context context) {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("text", text);
         clipboard.setPrimaryClip(clip);

@@ -63,8 +63,8 @@ public class Dialogs {
         cookieDialog.setTitle(context.getString(R.string.cookies));
         cookieDialog.setView(view);
         cookieDialog.setPositiveButton(context.getString(R.string.copy_to_clipboard), (dialog, whichButton) -> {
-            Utils.Copy(currentFormat[0], context);
-            Utils.Toast(context, context.getString(R.string.copied));
+            Utils.copy(currentFormat[0], context);
+            Utils.toast(context, context.getString(R.string.copied));
         });
         cookieDialog.show();
     }
@@ -114,7 +114,7 @@ public class Dialogs {
                 String inputText = editText.getText().toString().trim();
                 
                 if (inputText.isEmpty()) {
-                    Utils.Toast(context, context.getString(R.string.cookies_empty));
+                    Utils.toast(context, context.getString(R.string.cookies_empty));
                     return;
                 }
                 
@@ -122,7 +122,7 @@ public class Dialogs {
                     String standardCookies = CookieFormatter.parse(inputText, formatSpinner.getSelectedItemPosition());
                     
                     if (standardCookies.isEmpty()) {
-                        Utils.Toast(context, context.getString(R.string.invalid_cookie_format));
+                        Utils.toast(context, context.getString(R.string.invalid_cookie_format));
                         return;
                     }
                     
@@ -137,12 +137,12 @@ public class Dialogs {
                     }
                     cookieManager.flush();
                     
-                    Utils.Toast(context, context.getString(R.string.cookies_saved));
+                    Utils.toast(context, context.getString(R.string.cookies_saved));
                     webView.loadUrl(Constant.FACEBOOK_HOME);
                     
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Utils.Toast(context, context.getString(R.string.invalid_cookie_format));
+                    Utils.toast(context, context.getString(R.string.invalid_cookie_format));
                 }
             }
         });
@@ -166,8 +166,8 @@ public class Dialogs {
         urlDialog.setTitle(context.getString(R.string.current_url));
         urlDialog.setView(view);
         urlDialog.setPositiveButton(android.R.string.copy, (dialog, whichButton) -> {
-            Utils.Copy(url, context);
-            Utils.Toast(context, context.getString(R.string.copied));
+            Utils.copy(url, context);
+            Utils.toast(context, context.getString(R.string.copied));
         });
         urlDialog.setNegativeButton(android.R.string.cancel, null);
         urlDialog.show();

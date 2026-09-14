@@ -3,6 +3,7 @@ package com.farhanali.lite;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -121,8 +122,8 @@ public class MainActivity extends AppCompatActivity{
         webSettings.setDisplayZoomControls(false);
         webView.setBackgroundColor(android.graphics.Color.TRANSPARENT);
 
-        if (androidx.webkit.WebViewFeature.isFeatureSupported(androidx.webkit.WebViewFeature.ALGORITHMIC_DARKENING)) {
-            androidx.webkit.WebSettingsCompat.setAlgorithmicDarkeningAllowed(webSettings, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            webSettings.setAlgorithmicDarkeningAllowed(true);
         }
 
         androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);

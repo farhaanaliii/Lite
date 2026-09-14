@@ -37,6 +37,7 @@ public class CrashActivity extends AppCompatActivity implements MenuItem.OnMenuI
     public boolean onMenuItemClick(MenuItem item) {
         if(item.getItemId() == android.R.id.copy){
             Utils.copy(crashLog, context);
+            Utils.toast(context, R.string.copied);
             return true;
         }
         return false;

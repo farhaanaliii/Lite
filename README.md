@@ -69,7 +69,7 @@ Lite++ is a lightweight Android browser wrapper for Facebook with built-in cooki
 
 ## Contributing
 
-Contributions, bug reports, and feature suggestions are welcome via issues and pull requests.
+Contributions, bug reports, and feature suggestions are welcome via issues and pull requests. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 

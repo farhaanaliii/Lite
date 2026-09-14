@@ -1,14 +1,9 @@
 package com.farhanali.lite.update;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-
-import androidx.core.content.pm.PackageInfoCompat;
-
+import com.farhanali.lite.BuildConfig;
 import com.farhanali.lite.Constant;
 import com.farhanali.lite.R;
 import com.farhanali.lite.ui.Dialogs;
@@ -43,8 +38,7 @@ public class UpdateChecker {
         }
         try {
             JSONObject json = new JSONObject(jsonStr);
-            PackageInfo pInfo = getPackageInfo(context);
-            long currentCode = pInfo != null ? PackageInfoCompat.getLongVersionCode(pInfo) : 0;
+            long currentCode = BuildConfig.VERSION_CODE;
             if (isUpdateAvailable(currentCode, json)) {
                 Dialogs.showUpdateDialog(context, jsonStr);
             } else {
@@ -58,20 +52,6 @@ public class UpdateChecker {
     private static boolean isUpdateAvailable(long currentCode, JSONObject json) {
         long latestCode = json.optLong("latest_version_code", -1);
         return currentCode > 0 && latestCode > currentCode;
-    }
-
-    private static PackageInfo getPackageInfo(Context context) {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                return context.getPackageManager().getPackageInfo(
-                    context.getPackageName(),
-                    PackageManager.PackageInfoFlags.of(0)
-                );
-            }
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-        } catch (Exception ignored) {
-            return null;
-        }
     }
 
     private static String fetchJson() {

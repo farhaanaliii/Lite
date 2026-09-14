@@ -39,7 +39,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (clearCachePref != null) {
             clearCachePref.setOnPreferenceClickListener(preference -> {
                 Utils.clearCache(requireContext());
-                Utils.toast(getContext(), getString(R.string.cache_cleared));
+                Utils.toast(requireContext(), R.string.cache_cleared);
                 return true;
             });
         }
@@ -48,7 +48,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (clearStoragePref != null) {
             clearStoragePref.setOnPreferenceClickListener(preference -> {
                 Utils.clearData(requireContext());
-                Utils.toast(getContext(), getString(R.string.storage_cleared));
+                Utils.toast(requireContext(), R.string.storage_cleared);
                 return true;
             });
         }
@@ -58,7 +58,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             resetSettingsPref.setOnPreferenceClickListener(preference -> {
                 settings.saveCustomUserAgent("");
                 settings.setJavaScriptEnabled(true);
-                Utils.toast(getContext(), getString(R.string.settings_reset));
+                Utils.toast(requireContext(), R.string.settings_reset);
                 return true;
             });
         }
@@ -70,7 +70,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             userAgentPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 String newUserAgent = (String) newValue;
                 settings.saveCustomUserAgent(newUserAgent);
-                Utils.toast(getContext(), getString(R.string.user_agent_updated));
+                Utils.toast(requireContext(), R.string.user_agent_updated);
                 return true;
             });
         }
@@ -81,7 +81,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             jsEnabledPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean isEnabled = (Boolean) newValue;
                 settings.setJavaScriptEnabled(isEnabled);
-                Utils.toast(getContext(), getString(R.string.javascript_updated));
+                Utils.toast(requireContext(), R.string.javascript_updated);
                 return true;
             });
         }

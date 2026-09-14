@@ -1,5 +1,6 @@
 package com.farhanali.lite.ui;
 
+import androidx.annotation.StringRes;
 import android.net.NetworkCapabilities;
 import android.webkit.WebStorage;
 import android.widget.Toast;
@@ -10,6 +11,10 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 
 public class Utils {
+
+    public static void toast(Context context, @StringRes int resId) {
+        Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
+    }
 
     public static void toast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();

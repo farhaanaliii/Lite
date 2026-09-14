@@ -3,6 +3,27 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            // Use the release key for debug builds to preserve app data and sessions when switching
+            // between debug and release APKs.
+            def localPropertiesFile = rootProject.file('local.properties')
+            if (localPropertiesFile.exists()) {
+                def localProperties = new Properties()
+                localProperties.load(new FileInputStream(localPropertiesFile))
+                def keystorePath = localProperties.getProperty('KEYSTORE_PATH')
+                if (keystorePath) {
+                    if (!file(keystorePath).exists()) {
+                        throw new GradleException("KEYSTORE_PATH configured in local.properties was not found: ${keystorePath}")
+                    }
+                    storeFile file(keystorePath)
+                    storePassword localProperties.getProperty('KEYSTORE_PASSWORD')
+                    keyAlias localProperties.getProperty('KEY_ALIAS')
+                    keyPassword localProperties.getProperty('KEY_PASSWORD')
+                }
+            }
+        }
+    }
     namespace = 'com.farhanali.lite'
     compileSdk = 36
 

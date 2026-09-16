@@ -3,6 +3,7 @@ package com.farhanali.lite.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,19 @@ import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+
 import com.farhanali.lite.BuildConfig;
 import com.farhanali.lite.Constant;
+import com.farhanali.lite.DownloadService;
 import com.farhanali.lite.R;
+import com.farhanali.lite.Updater;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.farhanali.lite.web.CookieFormatter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -185,44 +193,39 @@ public class Dialogs {
         try {
             JSONObject json = new JSONObject(jsonResponse);
             String latestVersion = json.getString("latest_version");
-            String downloadUrl = json.getString("download_url");
-            JSONArray changelog = json.getJSONArray("changelog");
-            
+            String downloadUrl   = json.getString("download_url");
+            JSONArray changelog  = json.getJSONArray("changelog");
+
             SpannableStringBuilder message = new SpannableStringBuilder();
             message.append(context.getString(R.string.version_available, latestVersion)).append("\n\n");
-            
+
             for (int i = 0; i < changelog.length(); i++) {
                 JSONObject release = changelog.getJSONObject(i);
                 if (release.getString("version").equals(latestVersion)) {
                     JSONArray changes = release.getJSONArray("changes");
                     message.append(context.getString(R.string.whats_new)).append("\n");
-                    
                     for (int j = 0; j < changes.length(); j++) {
                         JSONObject change = changes.getJSONObject(j);
-                        String type = change.getString("type");
-                        String description = change.getString("description");
-                        
-                        message.append(getChangeIcon(type))
-                            .append(" ")
-                            .append(description)
-                            .append("\n");
+                        message.append(getChangeIcon(change.getString("type")))
+                               .append(" ")
+                               .append(change.getString("description"))
+                               .append("\n");
                     }
                     break;
                 }
             }
-            
+
             message.append("\n").append(context.getString(R.string.download_update_prompt));
-            
+
             new MaterialAlertDialogBuilder(context)
                 .setTitle(context.getString(R.string.update_available))
                 .setMessage(message)
-                .setPositiveButton(context.getString(R.string.download), (dialog, which) -> {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl));
-                    context.startActivity(browserIntent);
+                .setPositiveButton(context.getString(R.string.download), (d, w) -> {
+                    Updater.resolve_and_download(context);
                 })
                 .setNegativeButton(context.getString(R.string.later), null)
                 .show();
-                
+
         } catch (Exception e) {
             new MaterialAlertDialogBuilder(context)
                 .setTitle(context.getString(R.string.update_available))
@@ -230,6 +233,69 @@ public class Dialogs {
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
         }
+    }
+
+    public static void showDownloadProgressDialog(Context context, String url, String sha256) {
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        int pad = (int) (24 * context.getResources().getDisplayMetrics().density);
+        layout.setPadding(pad, pad / 2, pad, pad / 2);
+
+        TextView status_text = new TextView(context);
+        status_text.setText(R.string.download_starting);
+        status_text.setTextSize(14);
+        status_text.setPadding(0, 0, 0, pad / 2);
+
+        LinearProgressIndicator progress_bar = new LinearProgressIndicator(context);
+        progress_bar.setIndeterminate(true);
+        progress_bar.setMax(100);
+
+        layout.addView(status_text);
+        layout.addView(progress_bar);
+
+        AlertDialog[] dialog = new AlertDialog[1];
+        dialog[0] = new MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.app_name)
+            .setView(layout)
+            .setCancelable(false)
+            .setNegativeButton(android.R.string.cancel, (d, w) -> {
+                DownloadService.cancel(context);
+                dialog[0].dismiss();
+            })
+            .create();
+
+        DownloadService.set_progress_listener(new DownloadService.ProgressListener() {
+            @Override
+            public void on_progress(int percent) {
+                if (dialog[0].isShowing()) {
+                    if (progress_bar.isIndeterminate()) {
+                        progress_bar.setIndeterminate(false);
+                    }
+                    progress_bar.setProgressCompat(percent, true);
+                    status_text.setText(context.getString(R.string.downloading_progress, percent));
+                }
+            }
+
+            @Override
+            public void on_complete() {
+                DownloadService.set_progress_listener(null);
+                if (dialog[0].isShowing()) {
+                    dialog[0].dismiss();
+                }
+            }
+
+            @Override
+            public void on_failed() {
+                DownloadService.set_progress_listener(null);
+                if (dialog[0].isShowing()) {
+                    dialog[0].dismiss();
+                }
+                Utils.toast(context, R.string.download_failed);
+            }
+        });
+
+        dialog[0].show();
+        Updater.start_update_download(context, url, sha256);
     }
 
     public static void showAboutDialog(Context context) {

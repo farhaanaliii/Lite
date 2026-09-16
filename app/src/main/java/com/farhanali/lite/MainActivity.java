@@ -15,14 +15,16 @@ import android.webkit.WebView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import android.content.pm.PackageManager;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.farhanali.lite.settings.Settings;
 import com.farhanali.lite.settings.SettingsActivity;
 import com.farhanali.lite.ui.Dialogs;
 import com.farhanali.lite.ui.Utils;
-import com.farhanali.lite.update.UpdateChecker;
 import com.farhanali.lite.web.LiteWebViewClient;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -42,6 +44,11 @@ public class MainActivity extends AppCompatActivity{
         new ActivityResultContracts.StartActivityForResult(),
         result -> {
             recreate();
+        });
+
+    private final ActivityResultLauncher<String> notif_permission_launcher = registerForActivityResult(
+        new ActivityResultContracts.RequestPermission(),
+        is_granted -> {
         });
 
     private android.webkit.ValueCallback<android.net.Uri[]> mFilePathCallback;
@@ -70,6 +77,13 @@ public class MainActivity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                notif_permission_launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
 
         context = this;
         init();
@@ -216,7 +230,7 @@ public class MainActivity extends AppCompatActivity{
             Dialogs.showEditCookiesDialog(context, webView, cookieManager);
         } else if (id == R.id.checkupdates) {
             if(Utils.isInternetOn(context)){
-                UpdateChecker.check(context);
+                Updater.check(context);
             }else{
                 Utils.toast(context, R.string.no_internet);
             }
@@ -242,11 +256,11 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        if(!hasCheckedUpdate){
+        if (!hasCheckedUpdate) {
             hasCheckedUpdate = true;
-            if(Utils.isInternetOn(context)){
-                UpdateChecker.check(context);
-            }else{
+            if (Utils.isInternetOn(context)) {
+                Updater.check(context);
+            } else {
                 Utils.toast(context, R.string.no_internet);
             }
         }

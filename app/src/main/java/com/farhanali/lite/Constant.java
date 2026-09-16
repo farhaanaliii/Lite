@@ -2,6 +2,7 @@ package com.farhanali.lite;
 
 public class Constant {
 	public static final String VERSION_URL = "https://cdn.jsdelivr.net/gh/farhaanaliii/Lite@main/updates.json";
+	public static final String GITHUB_API_RELEASES = "https://api.github.com/repos/farhaanaliii/Lite/releases/latest";
 	public static final String DESKTOP_USERAGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36";
 	public static final String FACEBOOK_HOME = "https://www.facebook.com";
 	public static final String GITHUB_REPO = "https://github.com/farhaanaliii/Lite";

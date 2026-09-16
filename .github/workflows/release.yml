@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 jobs:
   build:
@@ -66,24 +68,35 @@ jobs:
         if: always()
         run: rm -f release.keystore
 
-      - name: Prepare APK Asset
+      - name: Prepare APK Asset & Checksum
         run: |
           TAG_NAME="${{ github.ref_name }}"
           DEST_NAME="LitePlusPlus-${TAG_NAME}.apk"
 
           cp app/build/outputs/apk/release/app-release-signed.apk "$DEST_NAME"
+          sha256sum "$DEST_NAME" > "${DEST_NAME}.sha256"
           echo "APK_FILE=$DEST_NAME" >> $GITHUB_ENV
+          echo "SHA_FILE=${DEST_NAME}.sha256" >> $GITHUB_ENV
+
+      - name: Attest Build Provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: ${{ env.APK_FILE }}
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.APK_FILE }}
-          path: ${{ env.APK_FILE }}
+          path: |
+            ${{ env.APK_FILE }}
+            ${{ env.SHA_FILE }}
           retention-days: 7
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.APK_FILE }}
+          files: |
+            ${{ env.APK_FILE }}
+            ${{ env.SHA_FILE }}
           generate_release_notes: true

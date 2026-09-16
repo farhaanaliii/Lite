@@ -83,6 +83,16 @@
     <string name="checking_updates">Checking for updates…</string>
     <string name="update_check_failed">Failed to check for updates.</string>
 
+    <!-- Download -->
+    <string name="download_channel_name">Downloads</string>
+    <string name="download_starting">Starting download…</string>
+    <string name="downloading_progress">Downloading… %d%%</string>
+    <string name="download_failed">Download failed.</string>
+    <string name="download_complete">Download complete. Tap to install.</string>
+    <string name="update_missing_hash">This update is missing a verification hash and can\'t be installed safely. Please try again later.</string>
+    <string name="allow_install_title">Allow Installation</string>
+    <string name="allow_install_message">To install updates, allow Lite++ to install apps from unknown sources in Settings.</string>
+    <string name="open_settings">Open Settings</string>
     <!-- Settings toasts -->
     <string name="cache_cleared">WebView cache cleared!</string>
     <string name="storage_cleared">WebView storage cleared!</string>

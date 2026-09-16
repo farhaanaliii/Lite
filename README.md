@@ -45,8 +45,11 @@ Lite++ is a lightweight Android browser wrapper for Facebook with built-in cooki
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/Screenshot_20251224-180321.jpg" width="220" alt="Lite++ Screenshot 1"/>
-  <img src="screenshots/20251224_180615.jpg" width="220" alt="Lite++ Screenshot 2"/>
+  <img src="screenshots/mobile_mode.jpg" width="185" alt="Mobile Mode" />
+  <img src="screenshots/desktop_mode.jpg" width="185" alt="Desktop Mode" />
+  <img src="screenshots/account_status.jpg" width="185" alt="Account Status" />
+  <img src="screenshots/view_cookies.jpg" width="185" alt="View Cookies" />
+  <img src="screenshots/edit_cookies.jpg" width="185" alt="Edit Cookies" />
 </p>
 
 ## Building from Source

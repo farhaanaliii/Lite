@@ -1,10 +1,73 @@
 {
     "app_name": "Lite++",
     "package_name": "com.farhanali.lite",
-    "latest_version": "1.1.0",
-    "latest_version_code": 4,
+    "latest_version": "1.2.0",
+    "latest_version_code": 5,
     "download_url": "https://github.com/farhaanaliii/Lite/releases/latest",
     "changelog": [
+        {
+            "version": "1.2.0",
+            "version_code": 5,
+            "release_date": "2026-09-16",
+            "changes": [
+                {
+                    "type": "feature",
+                    "description": "In-app modern auto updater with download progress dialog"
+                },
+                {
+                    "type": "feature",
+                    "description": "Swipe to refresh and edge-to-edge layout"
+                },
+                {
+                    "type": "feature",
+                    "description": "App theme selection (light/dark/system)"
+                },
+                {
+                    "type": "feature",
+                    "description": "File upload support in WebView"
+                },
+                {
+                    "type": "feature",
+                    "description": "Show active logged-in account status in cookie dialog"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Native dark mode in WebView dropping legacy webkit dependency"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Modern splash activity for Android 12+"
+                },
+                {
+                    "type": "improvement",
+                    "description": "New Phosphor icons replacing legacy drawables"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Replace AboutActivity with simple Material 3 dialog"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Refactor cookies formatting and cookie dialog UI"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Fix and improve browser clear data and clear cache"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Route update checks through jsDelivr CDN to avoid rate limits"
+                },
+                {
+                    "type": "fix",
+                    "description": "Fix CookieManager sync by explicitly flushing cookies before WebView reload"
+                },
+                {
+                    "type": "improvement",
+                    "description": "Codebase refactoring, performance optimization, and general bug fixes"
+                }
+            ]
+        },
         {
             "version": "1.1.0",
             "version_code": 4,

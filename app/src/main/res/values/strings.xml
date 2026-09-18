@@ -70,6 +70,9 @@
     <string name="hint_netscape_format">Netscape format</string>
     <string name="hint_json_array_format">JSON Array format</string>
     <string name="hint_json_dict_format">JSON Dictionary format</string>
+    <string name="open_external_app_title">Open in External App?</string>
+    <string name="open_external_app_message">Do you want to leave Lite++ and open this link in an external application?</string>
+    <string name="open">Open</string>
 
     <!-- Update -->
     <string name="update_available">Update Available</string>

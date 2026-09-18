@@ -1,9 +1,12 @@
 package com.farhanali.lite.web;
 
+import android.content.Intent;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebViewClient;
 import android.webkit.WebView;
 import android.graphics.Bitmap;
 import android.view.View;
+import com.farhanali.lite.ui.Dialogs;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class LiteWebViewClient extends WebViewClient{
@@ -25,6 +28,23 @@ public class LiteWebViewClient extends WebViewClient{
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        String url = request.getUrl().toString();
+
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            return false;
+        }
+
+        try {
+            Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+            String fallback_url = intent.getStringExtra("browser_fallback_url");
+            Dialogs.showExternalLinkDialog(view.getContext(), intent, fallback_url, view);
+        } catch (Exception ignored) {}
+
+        return true;
     }
 
     @Override

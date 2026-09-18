@@ -319,6 +319,23 @@ public class Dialogs {
                 .show();
     }
 
+    public static void showExternalLinkDialog(Context context, Intent intent, String fallback_url, WebView web_view) {
+        new MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.open_external_app_title)
+            .setMessage(R.string.open_external_app_message)
+            .setPositiveButton(R.string.open, (dialog, which) -> {
+                try {
+                    context.startActivity(intent);
+                } catch (Exception ignored) {}
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                if (fallback_url != null && !fallback_url.isEmpty()) {
+                    web_view.loadUrl(fallback_url);
+                }
+            })
+            .show();
+    }
+
     private static String getChangeIcon(String type) {
         return switch (type) {
             case "feature" -> "✨"; // New feature

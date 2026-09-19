@@ -28,11 +28,6 @@ public class MainActivity extends AppCompatActivity{
     Browser browser;
     Context context;
     private static boolean hasCheckedUpdate = false;
-    ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
-        new ActivityResultContracts.StartActivityForResult(),
-        result -> {
-            recreate();
-        });
 
     private final ActivityResultLauncher<String> notif_permission_launcher = registerForActivityResult(
         new ActivityResultContracts.RequestPermission(),
@@ -172,7 +167,7 @@ public class MainActivity extends AppCompatActivity{
                 Utils.toast(context, R.string.no_internet);
             }
         } else if(id == R.id.settings){
-            settingsLauncher.launch(new Intent(context, SettingsActivity.class));
+            startActivity(new Intent(context, SettingsActivity.class));
         }
 
         return true;

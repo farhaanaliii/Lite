@@ -83,15 +83,12 @@ public class Browser {
         });
 
         applyDesktopMode(isDesktopMode);
-        syncSettings();
         loadHome();
     }
 
     public void syncSettings() {
         settings.setJavaScriptEnabled(appSettings.isJavaScriptEnabled());
-        if (!isDesktopMode) {
-            settings.setUserAgentString(getActiveUserAgent());
-        }
+        settings.setUserAgentString(isDesktopMode ? Constant.DESKTOP_USERAGENT : getActiveUserAgent());
     }
 
     public void setDesktopMode(boolean enabled) {
@@ -113,8 +110,8 @@ public class Browser {
         settings.setLoadWithOverviewMode(enabled);
         webView.setScrollBarStyle(enabled ? WebView.SCROLLBARS_OUTSIDE_OVERLAY : WebView.SCROLLBARS_INSIDE_OVERLAY);
         webView.setScrollbarFadingEnabled(!enabled);
-        settings.setUserAgentString(enabled ? Constant.DESKTOP_USERAGENT : getActiveUserAgent());
         webViewClient.setDesktopMode(enabled);
+        syncSettings();
     }
 
     private String getActiveUserAgent() {

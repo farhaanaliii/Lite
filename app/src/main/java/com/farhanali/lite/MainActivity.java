@@ -7,10 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -21,24 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.farhanali.lite.settings.Settings;
 import com.farhanali.lite.settings.SettingsActivity;
 import com.farhanali.lite.ui.Dialogs;
 import com.farhanali.lite.ui.Utils;
-import com.farhanali.lite.web.LiteWebViewClient;
+import com.farhanali.lite.web.Browser;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class MainActivity extends AppCompatActivity{
-    WebView webView;
-    WebSettings webSettings;
-    LiteWebViewClient webViewClient;
-    LinearProgressIndicator progressBar;
-    boolean isDesktopMode;
-    String userAgent;
-	CookieManager cookieManager = CookieManager.getInstance();
+    Browser browser;
     Context context;
-    Settings settings;
     private static boolean hasCheckedUpdate = false;
     ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
         new ActivityResultContracts.StartActivityForResult(),
@@ -109,85 +97,34 @@ public class MainActivity extends AppCompatActivity{
         // Tint overflow icon white for visibility on blue toolbar
         fixOverflowIconColor(toolbar);
 
-        settings = new Settings(context);
+        browser = new Browser(
+            context,
+            findViewById(R.id.webView),
+            findViewById(R.id.progressBar),
+            findViewById(R.id.swipeRefresh)
+        );
 
-        progressBar = findViewById(R.id.progressBar);
-        webView = findViewById(R.id.webView);
-        webSettings = webView.getSettings();
-
-        isDesktopMode = settings.isDesktopModeEnabled();
-        
-        cookieManager.setAcceptCookie(true);
-        
-        userAgent = settings.getUserAgent();
-        if(userAgent.isEmpty()){
-            userAgent = webSettings.getUserAgentString();
-            settings.saveUserAgent(userAgent);
-        }
-
-        if(!settings.getCustomUserAgent().isEmpty()){
-            userAgent = settings.getCustomUserAgent();
-        }
-
-        webSettings.setUserAgentString(userAgent.trim());
-        webSettings.setJavaScriptEnabled(settings.isJavaScriptEnabled());
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setDisplayZoomControls(false);
-        webView.setBackgroundColor(android.graphics.Color.TRANSPARENT);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            webSettings.setAlgorithmicDarkeningAllowed(true);
-        }
-
-        androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipeRefresh);
-        swipeRefresh.setOnRefreshListener(() -> webView.reload());
-
-        webViewClient = new LiteWebViewClient(progressBar, isDesktopMode);
-        webView.setWebViewClient(webViewClient);
-        webView.setWebChromeClient(new WebChromeClient(){
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-            super.onProgressChanged(view, newProgress);
-            progressBar.setProgress(newProgress, true);
-            if (newProgress == 100) {
-                swipeRefresh.setRefreshing(false);
+        browser.init((filePathCallback, fileChooserParams) -> {
+            if (mFilePathCallback != null) {
+                mFilePathCallback.onReceiveValue(null);
             }
-            }
+            mFilePathCallback = filePathCallback;
 
-            @Override
-            public boolean onShowFileChooser(WebView webView, android.webkit.ValueCallback<android.net.Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-                if (mFilePathCallback != null) {
-                    mFilePathCallback.onReceiveValue(null);
-                }
-                mFilePathCallback = filePathCallback;
-
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("*/*");
-                if (fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE) {
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                }
-                fileChooserLauncher.launch(Intent.createChooser(intent, getString(R.string.select_file)));
-                return true;
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("*/*");
+            if (fileChooserParams.getMode() == WebChromeClient.FileChooserParams.MODE_OPEN_MULTIPLE) {
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             }
+            fileChooserLauncher.launch(Intent.createChooser(intent, getString(R.string.select_file)));
+            return true;
         });
-
-        if(settings.isDesktopModeEnabled()){
-            webSettings.setUseWideViewPort(true);
-            webSettings.setSupportZoom(true);
-            webSettings.setLoadWithOverviewMode(true);
-            webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-            webView.setScrollbarFadingEnabled(false);
-            webSettings.setUserAgentString(Constant.DESKTOP_USERAGENT);
-        }
-
-        webView.loadUrl(Constant.FACEBOOK_HOME);
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (webView.canGoBack()) {
-                    webView.goBack();
+                if (browser.canGoBack()) {
+                    browser.goBack();
                 } else {
                     finish();
                 }
@@ -199,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.web_menu, menu);
         MenuItem desk = menu.findItem(R.id.desktop_mode);
-		desk.setChecked(isDesktopMode);
+		desk.setChecked(browser.isDesktopMode());
         return true;
     }
 
@@ -212,22 +149,22 @@ public class MainActivity extends AppCompatActivity{
             Dialogs.showCookieDialog(context);
         }
         else if (id == R.id.current_url){
-            Dialogs.showCurrentUrlDialog(context, webView.getUrl());
+            Dialogs.showCurrentUrlDialog(context, browser.getUrl());
         }
         else if(id == R.id.home) {
-            webView.loadUrl(Constant.FACEBOOK_HOME);
+            browser.loadHome();
         }
         else if(id == R.id.refresh) {
-            webView.reload();
+            browser.reload();
         }
         else if(id == R.id.desktop_mode){
-            desktopMode(item);
+            browser.desktopMode(item);
         }
         else if(id == R.id.about) {
             Dialogs.showAboutDialog(context);
         }
         else if(id == R.id.editCookies){
-            Dialogs.showEditCookiesDialog(context, webView, cookieManager);
+            Dialogs.showEditCookiesDialog(context, browser.getWebView(), browser.getCookieManager());
         } else if (id == R.id.checkupdates) {
             if(Utils.isInternetOn(context)){
                 Updater.check(context);
@@ -239,18 +176,6 @@ public class MainActivity extends AppCompatActivity{
         }
 
         return true;
-    }
-    private void desktopMode(MenuItem item) {
-        boolean isDesktopEnabled = !item.isChecked();
-        webSettings.setUseWideViewPort(isDesktopEnabled);
-        webSettings.setLoadWithOverviewMode(isDesktopEnabled);
-        webSettings.setUserAgentString(isDesktopEnabled ? Constant.DESKTOP_USERAGENT : userAgent);
-        webViewClient.setDesktopMode(isDesktopEnabled);
-        webView.loadUrl(Constant.FACEBOOK_HOME);
-
-        isDesktopMode = isDesktopEnabled;
-        item.setChecked(isDesktopEnabled);
-        settings.setDesktopModeEnabled(isDesktopEnabled);
     }
 
     @Override
@@ -269,17 +194,14 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        if (webView != null) {
-            webView.onPause();
-        }
+        browser.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (webView != null) {
-            webView.onResume();
-        }
+        browser.onResume();
+        browser.syncSettings();
     }
 
     private void fixOverflowIconColor(MaterialToolbar toolbar) {
